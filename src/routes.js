@@ -16,9 +16,9 @@ export default (
 
     <Switch>
         <Route component={ Home } path='/home' />
-        <Route component={ Categories } path='/categories/:category' />
-        <Route component={ Challenges } path='/challenges' />
-        <Route component={ FeaturedView } path='/featured' />
+        <Route component={ Categories } path='/categories' />
+        <Route component={ Challenges } path='/challenges/:Category' />
+        <Route component={ FeaturedView } path='/challenge/:id' />
         <Route component={ Friends } path='/friends' />
         <Route component={ LoginScreen } exact path='/' />
     </Switch>

@@ -31,7 +31,7 @@ class GlobalFooter extends Component {
                 <BottomNavigationItem
                     icon={challengeIcon}
                     onClick={() => this.select(1)}
-                    containerElement={<Link to="/challenges"/>}
+                    containerElement={<Link to="/categories"/>}
                 />
                     <BottomNavigationItem
                     icon={friendsIcon}

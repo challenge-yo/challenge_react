@@ -135,6 +135,11 @@ app.get('/api/wager/:id', function(req, res){
         res.status(200).send(response)
     })
 })
+app.get('/api/users/:id', function(req, res){
+    app.get('db').get_user_details([req.params.id]).then( response => {
+        res.status(200).send(response[0])
+    })
+})
 
 app.post('/api/addfriend', function (req, res){
     console.log( req.user )

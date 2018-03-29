@@ -1,0 +1,1 @@
+select distinct category, badge from challenges;

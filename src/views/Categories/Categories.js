@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import GlobalFooter from '../../components/GlobalFooter/GlobalFooter'
-import GlobalHeader from '../../components/GlobalHeader/GlobalHeader'
 import CategoryCard from '../../components/CategoryCard/CategoryCard'
 
 class Categories extends Component {
@@ -27,10 +25,7 @@ class Categories extends Component {
         })         
         return(
             <div>
-                
-                <GlobalHeader />
                 {categories}
-                <GlobalFooter />
             </div>
         )
     }

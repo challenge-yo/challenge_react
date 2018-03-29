@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import GlobalFooter from '../../components/GlobalFooter/GlobalFooter'
-import GlobalHeader from '../../components/GlobalHeader/GlobalHeader'
 import FeaturedCard from '../../components/FeaturedCard/FeaturedCard'
 
 class Featured extends Component {
@@ -29,9 +27,8 @@ class Featured extends Component {
           })
         return(
             <div>
-                <GlobalHeader />
+                Featured
                 {challenge}
-                <GlobalFooter />
             </div>
         )
     }

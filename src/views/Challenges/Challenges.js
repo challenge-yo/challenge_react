@@ -13,9 +13,11 @@ class Challenges extends Component {
     }
     componentDidMount(){
         this.categorizeChallenges()
+        console.log(this.props.match.params.Category)
     }
-    categorizeChallenges(category){
-        axios.get(`http://localhost:3000/api/challengeByCategory/${category}`).then(response => {
+    categorizeChallenges(){
+        let categoryName = this.props.match.params.Category
+        axios.get(`http://localhost:3000/api/challengeByCategory/${categoryName}`).then(response => {
             this.setState({challenges: response.data})
     })}
 

@@ -1,40 +1,39 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import GlobalFooter from '../../components/GlobalFooter/GlobalFooter'
 import GlobalHeader from '../../components/GlobalHeader/GlobalHeader'
-import CategoryCard from '../../components/CategoryCard/CategoryCard'
-
+import ChallengeCard from '../../components/ChallengeCard/ChallengeCard'
 class Challenges extends Component {
     constructor(){
         super()
-        
         this.state = {
-            categories: []
+            challenges: []
         }
     }
     componentDidMount(){
-        this.getCategories()
+        this.categorizeChallenges()
     }
-      getCategories(){
-          axios.get('http://localhost:3000/api/categories').then(response => {
-            this.setState({categories: response.data})
-          })
-      }
+    categorizeChallenges(category){
+        axios.get(`http://localhost:3000/api/challengeByCategory/${category}`).then(response => {
+            this.setState({challenges: response.data})
+            console.log(challenges)
+    })}
     render() {
-        const categories = this.state.categories.map((category, i) => {
-        return <CategoryCard key={i} category={category.category} icon={category.badge}/>
-        })         
+        const challenges =  this.state.challenges.map((challenge, i) => {
+            return <Link to={`/challenge/${challenge.id}`}><ChallengeCard key={i} name={challenge.challenge_name} categoryname={challenge.category} difficulty={challenge.difficulty}
+            time={challenge.due_time} icon={challenge.badge} description={challenge.description} /></Link>
+        })
         return(
             <div>
-                
                 <GlobalHeader />
-                {categories}
+                Challenges
+                <Link to={'/challenge/5'}>Featured</Link>
+                {challenges}
+              
                 <GlobalFooter />
             </div>
         )
     }
 }
-
-
-
 export default Challenges

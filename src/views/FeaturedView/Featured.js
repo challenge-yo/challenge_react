@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom';
-import GlobalFooter from '../../components/GlobalFooter/GlobalFooter'
-import GlobalHeader from '../../components/GlobalHeader/GlobalHeader'
+import { Link } from 'react-router-dom'
 import FeaturedCard from '../../components/FeaturedCard/FeaturedCard'
 import RaisedButton from 'material-ui/RaisedButton';
 import Add from 'material-ui/svg-icons/content/add';
@@ -33,16 +31,14 @@ class Featured extends Component {
           })
         return(
             <div>
-                <GlobalHeader />
                 {challenge}
                 <div>
-                <Link to='/home'><RaisedButton
+                <Link to='/wager'><RaisedButton
                     onClick={this.props.button}
                     label='Accept Challenge'
                     icon={<Add/>}
                 /></Link>
                 </div>
-                <GlobalFooter />
             </div>
         )
     }

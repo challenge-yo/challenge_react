@@ -9,6 +9,8 @@ import Challenges from './views/Challenges/Challenges'
 import FeaturedView from './views/FeaturedView/Featured'
 import Friends from './views/Friends/Friends'
 import LoginScreen from'./views/LoginScreen/LoginScreen'
+import Wager from'./views/Wager/Wager'
+import Profile from './views/Profile/Profile'
 
 
 
@@ -20,7 +22,9 @@ export default (
         <Route component={ Challenges } path='/challenges/:Category' />
         <Route component={ FeaturedView } path='/challenge/:id' />
         <Route component={ Friends } path='/friends' />
+        <Route component={ Wager } path='/wager' />
         <Route component={ LoginScreen } exact path='/' />
+        <Route component={ Profile } path='/profile' />
     </Switch>
 
 )

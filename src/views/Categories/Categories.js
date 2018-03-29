@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import GlobalFooter from '../../components/GlobalFooter/GlobalFooter'
-import GlobalHeader from '../../components/GlobalHeader/GlobalHeader'
 import CategoryCard from '../../components/CategoryCard/CategoryCard'
 
 class Categories extends Component {
@@ -23,14 +21,11 @@ class Categories extends Component {
       }
     render() {
         const categories = this.state.categories.map((category, i) => {
-        return <Link style={{ textDecoration: 'none'}} to={`/challenges/${category.category}`}><CategoryCard key={i} name={category.category} icon={category.badge}/></Link>
+        return <Link key={i} style={{ textDecoration: 'none'}} to={`/challenges/${category.category}`}><CategoryCard name={category.category} icon={category.badge}/></Link>
         })         
         return(
             <div>
-                
-                <GlobalHeader />
                 {categories}
-                <GlobalFooter />
             </div>
         )
     }

@@ -7,6 +7,12 @@ import ProfileIcon from 'material-ui/svg-icons/action/account-circle'
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import ChallengeIcon from 'material-ui/svg-icons/action/assessment'
 
+// dont need to define variable  just declare them as components
+// const friendsIcon = <FriendsIcon  />
+// const profileIcon = <ProfileIcon />
+// const homeIcon = <HomeIcon />
+// const challengeIcon = <ChallengeIcon />
+
 class GlobalFooter extends Component {
   state = {
     selectedIndex: 0,
@@ -17,19 +23,19 @@ class GlobalFooter extends Component {
   render() {
     return (
             <Paper zDepth={1}>
-                <BottomNavigation style={{ position: 'fixed', bottom: 0, width: '100vw' }} selectedIndex={this.state.selectedIndex}>
+                <BottomNavigation style={{ width: '100vw' }} selectedIndex={this.state.selectedIndex}>
                 <BottomNavigationItem
                     icon={<HomeIcon />}
                     onClick={() => this.select(0)}
-                    containerElement={<Link to="/home"/>}
+                    containerElement={<Link to="/"/>}
                 />
                 <BottomNavigationItem
                     icon={<ChallengeIcon />}
                     onClick={() => this.select(1)}
-                    containerElement={<Link to="/categories"/>}
+                    containerElement={<Link to="/challenges"/>}
                 />
                     <BottomNavigationItem
-                    icon={<FriendsIcon  />}
+                    icon={<FriendsIcon />}
                     onClick={() => this.select(2)}
                     containerElement={<Link to="/friends"/>}
                 />

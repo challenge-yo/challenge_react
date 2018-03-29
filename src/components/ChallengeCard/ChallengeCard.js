@@ -24,7 +24,7 @@ class ChallengeCard extends Component {
                         </p>
                         }
                      />
-                  <Divider inset={true} />
+                  <Divider/>
             </List>
         )
     }

@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 import GlobalFooter from '../../components/GlobalFooter/GlobalFooter'
 import GlobalHeader from '../../components/GlobalHeader/GlobalHeader'
 import FeaturedCard from '../../components/FeaturedCard/FeaturedCard'
+import RaisedButton from 'material-ui/RaisedButton';
+import Add from 'material-ui/svg-icons/content/add';
+import FontIcon from 'material-ui/FontIcon';
 
 class Featured extends Component {
     constructor(){
@@ -31,6 +35,13 @@ class Featured extends Component {
             <div>
                 <GlobalHeader />
                 {challenge}
+                <div>
+                <Link to='/home'><RaisedButton
+                    onClick={this.props.button}
+                    label='Accept Challenge'
+                    icon={<Add/>}
+                /></Link>
+                </div>
                 <GlobalFooter />
             </div>
         )

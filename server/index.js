@@ -38,13 +38,13 @@ passport.use( new Auth0Strategy({
 }, function( accessToken, refreshToken, extraParams, profile, done ) {
 
     const db = app.get('db')
-    const { sub, given_name, family_name, nickname, picture } = profile._json
+    const { sub, given_name, family_name, name, picture } = profile._json
     
     db.find_user([sub]).then( response => {
         if (response[0]) {
             done( null, response[0].facebook_id )
         } else {
-            db.create_user([sub, nickname, given_name, family_name, picture]).then( response => {
+            db.create_user([sub, name, given_name, family_name, picture]).then( response => {
                 done( null, response[0].facebook_id )
             })
         } 

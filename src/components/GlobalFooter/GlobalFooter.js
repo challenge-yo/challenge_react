@@ -7,11 +7,6 @@ import ProfileIcon from 'material-ui/svg-icons/action/account-circle'
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import ChallengeIcon from 'material-ui/svg-icons/action/assessment'
 
-const friendsIcon = <FriendsIcon  />
-const profileIcon = <ProfileIcon />
-const homeIcon = <HomeIcon />
-const challengeIcon = <ChallengeIcon />
-
 class GlobalFooter extends Component {
   state = {
     selectedIndex: 0,
@@ -24,22 +19,22 @@ class GlobalFooter extends Component {
             <Paper zDepth={1}>
                 <BottomNavigation style={{ position: 'fixed', bottom: 0, width: '100vw' }} selectedIndex={this.state.selectedIndex}>
                 <BottomNavigationItem
-                    icon={homeIcon}
+                    icon={<HomeIcon />}
                     onClick={() => this.select(0)}
-                    containerElement={<Link to="/"/>}
+                    containerElement={<Link to="/home"/>}
                 />
                 <BottomNavigationItem
-                    icon={challengeIcon}
+                    icon={<ChallengeIcon />}
                     onClick={() => this.select(1)}
                     containerElement={<Link to="/categories"/>}
                 />
                     <BottomNavigationItem
-                    icon={friendsIcon}
+                    icon={<FriendsIcon  />}
                     onClick={() => this.select(2)}
                     containerElement={<Link to="/friends"/>}
                 />
                     <BottomNavigationItem
-                    icon={profileIcon}
+                    icon={<ProfileIcon />}
                     onClick={() => this.select(3)}
                     containerElement={<Link to="/profile"/>}
                 />

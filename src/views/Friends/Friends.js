@@ -59,14 +59,12 @@ class Friends extends Component {
         })
         return (
             <div>
-                <GlobalHeader />
                 <Subheader>Potential Friends</Subheader>
                 {friends}
                 <Subheader>Friend Requests</Subheader>
                 {confirm}
                 <Subheader>Confirmed Friends</Subheader>
                 {actual}
-                <GlobalFooter />
             </div>
         )
     }

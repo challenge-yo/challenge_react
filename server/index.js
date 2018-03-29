@@ -116,6 +116,11 @@ app.get('/api/confirm', function(req, res){
         res.status(200).send(response)
     })
 })
+app.get('/api/wager/:id', function(req, res){
+    app.get('db').get_wager([req.params.id]).then( response => {
+        res.status(200).send(response)
+    })
+})
 
 app.post('/api/addfriend', function (req, res){
     console.log(req.body.id)
@@ -143,3 +148,4 @@ app.post('/api/newuser', function(req, res) {
         res.status(200).send(resp)
     })
 })
+

@@ -11,12 +11,10 @@ class CategoryCard extends Component {
                 <ListItem 
                     rightAvatar={<Avatar src={this.props.icon} />}
                     primaryText={this.props.name} 
-                      
                 />
                 <Divider inset={true} />
             </List>
         )
     }
 }
-
 export default CategoryCard

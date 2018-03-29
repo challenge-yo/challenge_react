@@ -7,7 +7,7 @@ class CategoryCard extends Component {
     render() {
         return(
             <List>
-                <ListItem 
+                <ListItem
                     rightAvatar={<Avatar src={this.props.icon} />}
                     primaryText={this.props.name} 
                 />
@@ -16,5 +16,4 @@ class CategoryCard extends Component {
         )
     }
 }
-
 export default CategoryCard

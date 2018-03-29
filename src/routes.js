@@ -22,7 +22,7 @@ export default (
         <Route component={ Challenges } path='/challenges/:Category' />
         <Route component={ FeaturedView } path='/challenge/:id' />
         <Route component={ Friends } path='/friends' />
-        <Route component={ Wager } path='/wager' />
+        <Route component={ Wager } path='/wager/:id' />
         <Route component={ LoginScreen } exact path='/' />
         <Route component={ Profile } path='/profile' />
     </Switch>

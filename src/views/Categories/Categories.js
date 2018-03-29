@@ -21,7 +21,7 @@ class Categories extends Component {
       }
     render() {
         const categories = this.state.categories.map((category, i) => {
-        return <Link style={{textDecoration: 'none'}}key={i} to={`/challenges/${category.category}`}><CategoryCard  name={category.category} icon={category.badge}/></Link>
+        return <Link style={{textDecoration: 'none', textSize: 32}}key={i} to={`/challenges/${category.category}`}><CategoryCard  name={category.category} icon={category.badge}/></Link>
         })         
         return(
             <div>

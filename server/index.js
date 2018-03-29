@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 const Auth0Strategy = require('passport-auth0')
 const { REACT_REDIRECT, REACT_HOME, SERVER_PORT, SERVER_SECRET, SERVER_BASE, DOMAIN, CLIENTID, CLIENT_SECRET, CALLBACK_URL } = process.env
+const checkForSession = require('./middleware/checkForSessions')
 
 const app = express()
 
@@ -20,6 +21,10 @@ app.use( session({
     resave: false,
     saveUninitialized: true
 }))
+
+// REMEMBER - remove middleware... currently in testing mode.
+
+// app.use( checkForSession )
 
 app.use( passport.initialize() )
 
@@ -39,7 +44,7 @@ passport.use( new Auth0Strategy({
 
     const db = app.get('db')
     const { sub, given_name, family_name, name, picture } = profile._json
-    
+
     db.find_user([sub]).then( response => {
         if (response[0]) {
             done( null, response[0].facebook_id )
@@ -68,6 +73,8 @@ app.get('/auth', passport.authenticate('auth0') )
 app.get('/auth/callback', passport.authenticate('auth0', {
     successRedirect: REACT_REDIRECT
 }))
+
+// REMEMBER - change back to req.user... currently in testing mode.
 
 app.get('/auth/me', ( req, res ) => {
     if (!req.user) {
@@ -112,10 +119,17 @@ app.get('/api/friends', function(req, res){
 })
 
 app.get('/api/confirm', function(req, res){
-    app.get('db').confirm_needed().then( response => {
+    app.get('db').confirm_needed([req.user.facebook_id]).then( response => {
         res.status(200).send(response)
     })
 })
+
+app.get('/api/verified', function(req, res){
+    app.get('db').verified_friends([req.user.facebook_id]).then( response => {
+        res.status(200).send(response)
+    })
+})
+
 app.get('/api/wager/:id', function(req, res){
     app.get('db').get_wager([req.params.id]).then( response => {
         res.status(200).send(response)
@@ -123,22 +137,26 @@ app.get('/api/wager/:id', function(req, res){
 })
 
 app.post('/api/addfriend', function (req, res){
-    console.log(req.body.id)
-    app.get('db').add_friends([req.body.id, req.body.id2]).then(response => {
+    console.log( req.user )
+    app.get('db').add_friends([req.user.facebook_id, req.body.id, 0]).then(response => {
         res.status(200).send(response) 
     })
 })
 
-app.post('/api/confirmfriend', function (req, res){
-    console.log(req.body.id)
-    app.get('db').confirm_friends([req.body.id, req.body.id2]).then(response => {
+app.put('/api/confirmfriend', function (req, res){
+    app.get('db').confirm_friends([ req.body.id, req.user.facebook_id]).then(response => {
         res.status(200).send(response) 
     })
 })
 
-app.post('/api/declinefriend', function (req, res){
-    console.log(req.body.id)
-    app.get('db').decline_friends([req.body.id, req.body.id2]).then(response => {
+app.put('/api/declinefriend', function (req, res){
+    app.get('db').decline_friends([req.body.id, req.user.facebook_id]).then(response => {
+        res.status(200).send(response) 
+    })
+})
+
+app.delete('/api/deletefriend', function (req, res){
+    app.get('db').delete_friends([req.user.facebook_id, req.body.id]).then(response => {
         res.status(200).send(response) 
     })
 })

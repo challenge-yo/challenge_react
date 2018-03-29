@@ -1,3 +1,4 @@
-select * from users
-join relationships on users.id = relationships.user_id2
-where friendstatus = 0;
+select * 
+from relationships
+inner join users on relationships.user_id1 = users.facebook_id
+where relationships.users_id2 = $1 AND friendstatus = 0

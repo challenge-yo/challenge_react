@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import axios from 'axios'
 import Paper from 'material-ui/Paper';
 import FriendsIcon from 'material-ui/svg-icons/action/supervisor-account'
 import ProfileIcon from 'material-ui/svg-icons/action/account-circle'
@@ -11,6 +12,18 @@ class GlobalFooter extends Component {
   state = {
     selectedIndex: 0,
   };
+
+  componentDidMount() {
+    axios.get('/auth/me')
+    .then( resp => {
+        if (resp.data === 'Not logged in!') {
+            this.props.history.push('/')
+        }
+    })
+    .catch( err => {
+        console.error( err )
+    })
+}
 
   select = (index) => this.setState({selectedIndex: index});
 
@@ -44,4 +57,4 @@ class GlobalFooter extends Component {
   }
 }
 
-export default GlobalFooter
+export default withRouter(GlobalFooter)

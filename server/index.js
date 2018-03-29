@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 const Auth0Strategy = require('passport-auth0')
 const { REACT_REDIRECT, REACT_HOME, SERVER_PORT, SERVER_SECRET, SERVER_BASE, DOMAIN, CLIENTID, CLIENT_SECRET, CALLBACK_URL } = process.env
+const checkForSession = require('./middleware/checkForSessions')
 
 const app = express()
 
@@ -20,6 +21,10 @@ app.use( session({
     resave: false,
     saveUninitialized: true
 }))
+
+// REMEMBER - remove middleware... currently in testing mode.
+
+// app.use( checkForSession )
 
 app.use( passport.initialize() )
 
@@ -39,7 +44,7 @@ passport.use( new Auth0Strategy({
 
     const db = app.get('db')
     const { sub, given_name, family_name, name, picture } = profile._json
-    
+
     db.find_user([sub]).then( response => {
         if (response[0]) {
             done( null, response[0].facebook_id )
@@ -68,6 +73,8 @@ app.get('/auth', passport.authenticate('auth0') )
 app.get('/auth/callback', passport.authenticate('auth0', {
     successRedirect: REACT_REDIRECT
 }))
+
+// REMEMBER - change back to req.user... currently in testing mode.
 
 app.get('/auth/me', ( req, res ) => {
     if (!req.user) {

@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import GlobalFooter from '../../components/GlobalFooter/GlobalFooter'
-import GlobalHeader from '../../components/GlobalHeader/GlobalHeader'
 import axios from 'axios'
 import FriendsCard from './FriendsCard/FriendsCard'
 import Subheader from 'material-ui/Subheader';

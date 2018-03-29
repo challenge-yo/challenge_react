@@ -1,0 +1,17 @@
+.sideBySide{
+    display: flex;
+    margin-left: 10px;
+}
+.input{
+    margin-left: 10px;
+}
+.centerContent{
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+    justify-content: center;
+}
+.pushApart{
+    display: flex;
+    justify-content: space-between;
+}

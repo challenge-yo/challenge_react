@@ -17,6 +17,7 @@ class GlobalHeader extends Component {
         return(
             <AppBar onLeftIconButtonClick={ () => this.handleToggle() }>
                 <Drawer open={this.state.open} docked={false} onRequestChange={(open) => this.setState({open})}>
+                    
                 </Drawer>
             </AppBar>
         )

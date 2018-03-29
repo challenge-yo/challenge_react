@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+<<<<<<< HEAD
 import GlobalFooter from '../../components/GlobalFooter/GlobalFooter'
 import GlobalHeader from '../../components/GlobalHeader/GlobalHeader'
 import axios from 'axios'
 import FriendsCard from './FriendsCard/FriendsCard'
 import Subheader from 'material-ui/Subheader';
 
+=======
+>>>>>>> 58fd821f1992b6f2b1ce629c9d94ff6f50e9abe6
 
 class Friends extends Component {
 
@@ -59,14 +62,12 @@ class Friends extends Component {
         })
         return (
             <div>
-                <GlobalHeader />
                 <Subheader>Potential Friends</Subheader>
                 {friends}
                 <Subheader>Friend Requests</Subheader>
                 {confirm}
                 <Subheader>Confirmed Friends</Subheader>
                 {actual}
-                <GlobalFooter />
             </div>
         )
     }

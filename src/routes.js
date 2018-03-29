@@ -24,7 +24,7 @@ export default (
         <Route component={ Friends } path='/friends' />
         <Route component={ Wager } path='/wager/:id' />
         <Route component={ LoginScreen } exact path='/' />
-        <Route component={ Profile } path='/profile' />
+        <Route component={ Profile } path='/profile/:id' />
     </Switch>
 
 )

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 
-class Friends extends Component {
+class Profile extends Component {
     render() {
         return(
             <div>
+
             </div>
         )
     }
 }
 
-export default Friends
+export default Profile

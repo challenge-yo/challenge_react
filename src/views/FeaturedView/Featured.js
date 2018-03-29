@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import GlobalFooter from '../../components/GlobalFooter/GlobalFooter'
-import GlobalHeader from '../../components/GlobalHeader/GlobalHeader'
 import FeaturedCard from '../../components/FeaturedCard/FeaturedCard'
 
 class Featured extends Component {
@@ -14,8 +12,10 @@ class Featured extends Component {
     }
     componentDidMount(){
         this.getSpecificChallenge()
+        console.log(this.props.match.params.id)
     }
-    getSpecificChallenge(id){
+    getSpecificChallenge(){
+        const id = this.props.match.params.id
         axios.get(`http://localhost:3000/api/specificChallenge/${id}`).then(response => {
           this.setState({challenges: response.data})
         })
@@ -27,10 +27,8 @@ class Featured extends Component {
           })
         return(
             <div>
-                <GlobalHeader />
                 Featured
                 {challenge}
-                <GlobalFooter />
             </div>
         )
     }

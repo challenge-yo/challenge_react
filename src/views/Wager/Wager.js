@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import GlobalFooter from '../../components/GlobalFooter/GlobalFooter'
-import GlobalHeader from '../../components/GlobalHeader/GlobalHeader'
 import WagerCard from '../../components/WagerCard/WagerCard'
 import axios from 'axios'
 
@@ -21,10 +19,8 @@ class Wager extends Component {
     render() {
         return(
             <div>
-                <GlobalHeader />
                 <WagerCard challenge={this.state.challenge}/>
                 {/* <button onClick={()=>console.log(this.state)}>test</button> */}
-                <GlobalFooter />
             </div>
         )
     }

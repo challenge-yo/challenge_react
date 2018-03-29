@@ -9,7 +9,7 @@ class CategoryCard extends Component {
             <List>
                 <ListItem 
                     rightAvatar={<Avatar src={this.props.icon} />}
-                    primaryText={this.props.categoryname} 
+                    primaryText={this.props.name} 
                     containerElement={this.props.nav}  
                 />
                 <Divider inset={true} />

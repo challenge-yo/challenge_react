@@ -1,0 +1,8 @@
+.login-page-main-div {
+    background-image: url('./images/african-lion.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 100% top;
+    background-attachment: fixed;
+    height: 100vh;
+}

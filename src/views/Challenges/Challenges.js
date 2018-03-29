@@ -23,13 +23,11 @@ class Challenges extends Component {
 
     render() {
         const challenges =  this.state.challenges.map((challenge, i) => {
-            return <Link  key={i} to={`/challenge/${challenge.id}`}><ChallengeCard name={challenge.challenge_name} categoryname={challenge.category} difficulty={challenge.difficulty}
+            return <Link style={{textDecoration: 'none'}} key={i} to={`/challenge/${challenge.id}`}><ChallengeCard name={challenge.challenge_name} categoryname={challenge.category} difficulty={challenge.difficulty}
             time={challenge.due_time} icon={challenge.badge} description={challenge.description} /></Link>
         })
         return(
             <div>
-                Challenges
-                <Link to={'/challenge/5'}>Featured</Link>
                 {challenges}
             </div>
         )

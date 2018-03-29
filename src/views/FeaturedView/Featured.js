@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+
 import FeaturedCard from '../../components/FeaturedCard/FeaturedCard'
+
 
 class Featured extends Component {
     constructor(){
@@ -23,11 +25,10 @@ class Featured extends Component {
     render() {
         const challenge = this.state.challenges.map((challenge, i) => {
             return  <FeaturedCard key={i} name={challenge.challenge_name} category={challenge.category} difficulty={challenge.difficulty}
-            time={challenge.due_time} icon={challenge.badge} description={challenge.description} /> 
+            time={challenge.due_time} icon={challenge.badge} description={challenge.description} id={challenge.id} /> 
           })
         return(
             <div>
-                Featured
                 {challenge}
             </div>
         )

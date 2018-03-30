@@ -166,4 +166,9 @@ app.post('/api/newuser', function(req, res) {
         res.status(200).send(resp)
     })
 })
+app.get('/api/random', function(req, res) {
+    app.get('db').select_random().then(response => {
+        res.status(200).send(response)
+    })
+})
 

@@ -11,14 +11,16 @@ import ChallengeIcon from 'material-ui/svg-icons/action/assessment'
 class GlobalFooter extends Component {
   state = {
     selectedIndex: 0,
+    userId:undefined
   };
 
   componentDidMount() {
+      console.log(this.props)
     axios.get('/auth/me')
     .then( resp => {
         if (resp.data === 'Not logged in!') {
             this.props.history.push('/')
-        }
+        }else{ this.setState({userId:resp.data.id})}
     })
     .catch( err => {
         console.error( err )
@@ -49,7 +51,7 @@ class GlobalFooter extends Component {
                     <BottomNavigationItem
                     icon={<ProfileIcon />}
                     onClick={() => this.select(3)}
-                    containerElement={<Link to="/profile"/>}
+                    containerElement={<Link to={"/profile/"+this.state.userId}/>}
                 />
                 </BottomNavigation>
             </Paper>

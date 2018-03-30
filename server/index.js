@@ -50,6 +50,8 @@ passport.use( new Auth0Strategy({
             done( null, response[0].facebook_id )
         } else {
             db.create_user([sub, name, given_name, family_name, picture]).then( response => {
+                console.log('id added to badges table',response[0])
+                db.create_badges([response[0].id]).then(res=>console.log('created badges'))
                 done( null, response[0].facebook_id )
             })
         } 
@@ -136,6 +138,7 @@ app.get('/api/wager/:id', function(req, res){
     })
 })
 app.get('/api/users/:id', function(req, res){
+    console.log
     app.get('db').get_user_details([req.params.id]).then( response => {
         res.status(200).send(response[0])
     })

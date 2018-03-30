@@ -10,25 +10,35 @@ class FriendsCard extends Component {
     addFriend() {
         axios.post(`http://localhost:3000/api/addfriend`, {
             id: this.props.id
-        }).then(res => { this.props.getFriends })
+        }).then(res =>  {
+            console.log( 'Added...kind of ')
+            return this.props.getFriends
+        })
     }
 
     confirmFriend() {
         axios.put(`http://localhost:3000/api/confirmfriend`, {
             id: this.props.id
-        }).then(res => { this.props.confirmFriend, this.props.verified })
+        }).then(res => {
+            this.props.confirmFriend
+            this.props.verified
+        })
     }
 
     declineFriend() {
         axios.put(`http://localhost:3000/api/declinefriend`, {
             id: this.props.id
-        }).then(res => { this.props.confirmFriend })
+        }).then(res => {
+            this.props.confirmFriend
+        })
     }
 
     removeFriend() {
         axios.delete(`http://localhost:3000/api/deletefriend`, {
             id: this.props.id 
-        }).then(res => { this.props.verified })
+        }).then(res => {
+            this.props.verified
+        })
     }
 
     handleChange(){

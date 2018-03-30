@@ -145,7 +145,7 @@ app.get('/api/users/:id', function(req, res){
 })
 
 app.post('/api/addfriend', function (req, res){
-    app.get('db').find_relationship([req.user.facebook_id, req.body.id]).then(response => {
+    app.get('db').find_relationship([req.user.facebook_id, req.body.id]).then(response => { console.log( response )
         if (response.length > 0 ){
             res.status(200).send('relationship exists')
         } else {

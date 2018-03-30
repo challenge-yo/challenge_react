@@ -24,7 +24,6 @@ class Friend extends Component {
     }
     componentDidMount() {
         let userId = this.props.match.params.id
-        console.log('user id', userId)
         axios.get('/api/users/' + userId).then(res => {
             this.setState({ user: res.data })
         })

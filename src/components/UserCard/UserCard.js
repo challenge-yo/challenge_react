@@ -10,7 +10,6 @@ import badgeSocial from '../../images/Badge_Social_256.png'
 import badgeSpiritual from '../../images/Badge_Education_256.png'
 
 function UserCard(props) {
-    console.log(props)
 
     return (
         <div>

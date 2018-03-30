@@ -15,7 +15,6 @@ class GlobalFooter extends Component {
   };
 
   componentDidMount() {
-      console.log(this.props)
     axios.get('/auth/me')
     .then( resp => {
         if (resp.data === 'Not logged in!') {

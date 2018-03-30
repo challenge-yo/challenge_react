@@ -24,7 +24,7 @@ app.use( session({
 
 // REMEMBER - remove middleware... currently in testing mode.
 
-app.use( checkForSession )
+// app.use( checkForSession )
 
 app.use( passport.initialize() )
 
@@ -76,12 +76,13 @@ app.get('/auth/callback', passport.authenticate('auth0', {
 }))
 
 // REMEMBER - change back to req.user... currently in testing mode.
+// change back to req.session.user if you want to auto log in
 
 app.get('/auth/me', ( req, res ) => {
-    if (!req.session.user) {
+    if (!req.user) {
         res.send( 'Not logged in!' )
     } else {
-        res.status(200).send( req.session.user )
+        res.status(200).send( req.user )
     }
 })
 
@@ -114,7 +115,7 @@ app.get('/api/specificChallenge/:id', function( req, res ) {
 })
 
 app.get('/api/friends', function(req, res){
-    app.get('db').get_friends().then( response => {
+    app.get('db').potential_friends([req.user.facebook_id]).then( response => {
         res.status(200).send(response)
     })
 })
@@ -126,7 +127,7 @@ app.get('/api/confirm', function(req, res){
 })
 
 app.get('/api/verified', function(req, res){
-    app.get('db').verified_friends([req.user.facebook_id]).then( response => {
+    app.get('db').confirmed_friends([req.user.facebook_id]).then( response => {
         res.status(200).send(response)
     })
 })
@@ -144,9 +145,14 @@ app.get('/api/users/:id', function(req, res){
 })
 
 app.post('/api/addfriend', function (req, res){
-    console.log( req.user )
-    app.get('db').add_friends([req.user.facebook_id, req.body.id, 0]).then(response => {
-        res.status(200).send(response) 
+    app.get('db').find_relationship([req.user.facebook_id, req.body.id]).then(response => {
+        if (response.length > 0 ){
+            res.status(200).send('relationship exists')
+        } else {
+            app.get('db').add_friends([req.user.facebook_id, req.body.id, 0]).then(response => {
+                res.status(200).send(response) 
+            })
+        }
     })
 })
 

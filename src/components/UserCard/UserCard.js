@@ -1,40 +1,59 @@
 import React from 'react'
 import './UserCard.css'
-import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card';
-
-
-/// PLACHOLDER DATA TILL I GIT PROPS FROM DB
-let badges= [
-    {icon:'1', number:3},
-    {icon:'2', number:2},
-    {icon:'3', number:3},
-    {icon:'4', number:4},
-    {icon:'5', number:6},
-    {icon:'6', number:5},
-    {icon:'7', number:1}
-]
-badges = badges.map((x,i)=>{return(
-    <div key={i}>
-        <h4>{x.icon}</h4>
-        <h4>{x.number}</h4>
-    </div>
-)})
-////////////////////////////////////////
+import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
+import badgeBuisness from '../../images/Badge_Buisness_256.png'
+import badgeEducation from '../../images/Badge_Education_256.png'
+import badgeFamily from '../../images/Badge_Family_256.png'
+import badgeFinance from '../../images/Badge_Finance_256.png'
+import badgeHealth from '../../images/Badge_Health_256.png'
+import badgeSocial from '../../images/Badge_Social_256.png'
+import badgeSpiritual from '../../images/Badge_Education_256.png'
 
 function UserCard(props) {
-    
+    console.log(props)
+
     return (
         <div>
-            <Card>
+            <Card className='UserCard'>
                 <CardHeader
-                    title={props.user.first_name +' '+props.user.last_name}
+                    title={props.user.first_name + ' ' + props.user.last_name}
                     subtitle={"Rank: 34"}
                     avatar={props.user.image}
                 />
                 <CardTitle title="Badges" />
-                <div className='badges'>
-                    {badges}
+                <div className='centerContent'> 
+                    <div className='badges'>
+                        <div >
+                            <img className='badgeIcon' src={badgeBuisness} alt="" />
+                            <h4>{props.user.buisness}</h4>
+                        </div>
+                        <div >
+                            <img className='badgeIcon' src={badgeEducation} alt="" />
+                            <h4>{props.user.education}</h4>
+                        </div>
+                        <div >
+                            <img className='badgeIcon' src={badgeFamily} alt="" />
+                            <h4>{props.user.family}</h4>
+                        </div>
+                        <div >
+                            <img className='badgeIcon' src={badgeFinance} alt="" />
+                            <h4>{props.user.finance}</h4>
+                        </div>
+                        <div >
+                            <img className='badgeIcon' src={badgeHealth} alt="" />
+                            <h4>{props.user.health}</h4>
+                        </div>
+                        <div >
+                            <img className='badgeIcon' src={badgeSocial} alt="" />
+                            <h4>{props.user.social}</h4>
+                        </div>
+                        <div >
+                            <img className='badgeIcon' src={badgeSpiritual} alt="" />
+                            <h4>{props.user.spiritual}</h4>
+                        </div>
+                    </div>
                 </div>
+
                 <h3>Stats:</h3>
                 <CardText>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.

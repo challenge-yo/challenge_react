@@ -3,22 +3,35 @@ import UserCard from '../../components/UserCard/UserCard'
 import axios from 'axios'
 
 class Profile extends Component {
-    constructor(){
+    constructor() {
         super()
-        this.state={
-            user: {}
+        this.state = {
+            user: {
+                buisness: 0,
+                education: 0,
+                family: 0,
+                finance: 0,
+                first_name: "",
+                health: 0,
+                id: 0,
+                image: "",
+                last_name: "",
+                social: 0,
+                spiritual: 0,
+                user_name: ""
+            }
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         let userId = this.props.match.params.id
-        axios.get('/api/users/'+userId).then(res => {
-            this.setState({user: res.data})
+        axios.get('/api/users/' + userId).then(res => {
+            this.setState({ user: res.data })
         })
     }
     render() {
-        return(
+        return (
             <div>
-                <UserCard user={this.state.user}/>
+                <UserCard user={this.state.user} />
             </div>
         )
     }

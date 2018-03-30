@@ -16,6 +16,19 @@ class Friends extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        console.log('next props bro', nextProps)
+        if (nextProps.data !== this.state.data){
+            this.setState({data:nextProps.data})
+        }
+        if (nextProps.data2 !== this.state.data2){
+            this.setState({data2:nextProps.data2})
+        }
+        if (nextProps.data3 !== this.state.data3){
+            this.setState({data3:nextProps.data3})
+        }
+    }
+
 
     componentDidMount() {
         this.getFriends()
@@ -42,6 +55,10 @@ class Friends extends Component {
             this.setState({ data3: res.data })
         })
     }
+
+    // handleChange(){
+    //     this.setState({data})
+    // }
 
     render() {
         const friends = this.state.data.map((friend, i) => {

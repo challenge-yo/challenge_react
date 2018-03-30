@@ -5,12 +5,7 @@ import { List, ListItem } from 'material-ui/List';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 
 class FriendsCard extends Component {
-    constructor() {
-        super()
-        this.state = {
-            confirm: []
-        }
-    }
+
 
     addFriend() {
         axios.post(`http://localhost:3000/api/addfriend`, {
@@ -34,6 +29,10 @@ class FriendsCard extends Component {
         axios.delete(`http://localhost:3000/api/deletefriend`, {
             id: this.props.id 
         }).then(res => { console.log('You have enough friends!') })
+    }
+
+    handleChange(){
+        
     }
 
     render() {

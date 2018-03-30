@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
+import axios from 'axios'
+import {List, ListItem} from 'material-ui/List';
+import Divider from 'material-ui/Divider'
 
 class GlobalHeader extends Component {
     constructor() {
@@ -17,7 +20,13 @@ class GlobalHeader extends Component {
         return(
             <AppBar onLeftIconButtonClick={ () => this.handleToggle() }>
                 <Drawer open={this.state.open} docked={false} onRequestChange={(open) => this.setState({open})}>
-                    
+                    <List>
+                        <ListItem primaryText='Home' />
+                        <ListItem primaryText='Friends' />
+                        <ListItem primaryText='Challenges' />
+                        <Divider />
+                        <ListItem primaryText='Logout' href='http://localhost:3005/logout'/>
+                    </List>
                 </Drawer>
             </AppBar>
         )

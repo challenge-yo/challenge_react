@@ -50,6 +50,7 @@ passport.use( new Auth0Strategy({
             done( null, response[0].facebook_id )
         } else {
             db.create_user([sub, name, given_name, family_name, picture]).then( response => {
+                db.create_badges([response[0].id]).then(res=>console.log('created badges'))
                 done( null, response[0].facebook_id )
             })
         } 
@@ -75,6 +76,7 @@ app.get('/auth/callback', passport.authenticate('auth0', {
 }))
 
 // REMEMBER - change back to req.user... currently in testing mode.
+// change back to req.session.user if you want to auto log in
 
 app.get('/auth/me', ( req, res ) => {
     if (!req.user) {
@@ -113,7 +115,7 @@ app.get('/api/specificChallenge/:id', function( req, res ) {
 })
 
 app.get('/api/friends', function(req, res){
-    app.get('db').get_friends().then( response => {
+    app.get('db').potential_friends([req.user.facebook_id]).then( response => {
         res.status(200).send(response)
     })
 })
@@ -125,7 +127,7 @@ app.get('/api/confirm', function(req, res){
 })
 
 app.get('/api/verified', function(req, res){
-    app.get('db').verified_friends([req.user.facebook_id]).then( response => {
+    app.get('db').confirmed_friends([req.user.facebook_id]).then( response => {
         res.status(200).send(response)
     })
 })
@@ -135,11 +137,22 @@ app.get('/api/wager/:id', function(req, res){
         res.status(200).send(response)
     })
 })
+app.get('/api/users/:id', function(req, res){
+    console.log
+    app.get('db').get_user_details([req.params.id]).then( response => {
+        res.status(200).send(response[0])
+    })
+})
 
 app.post('/api/addfriend', function (req, res){
-    console.log( req.user )
-    app.get('db').add_friends([req.user.facebook_id, req.body.id, 0]).then(response => {
-        res.status(200).send(response) 
+    app.get('db').find_relationship([req.user.facebook_id, req.body.id]).then(response => {
+        if (response.length > 0 ){
+            res.status(200).send('relationship exists')
+        } else {
+            app.get('db').add_friends([req.user.facebook_id, req.body.id, 0]).then(response => {
+                res.status(200).send(response) 
+            })
+        }
     })
 })
 

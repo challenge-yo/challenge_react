@@ -1,0 +1,36 @@
+
+.sideBySide{
+    display: flex;
+    margin-left: 10px;
+}
+.input{
+    margin-left: 10px;
+}
+.centerContent{
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+    justify-content: center;
+}
+.pushApart{
+    display: flex;
+    justify-content: space-between;
+}
+.badges{
+    display: flex;
+    justify-content: space-around;
+    width: 80vw;
+}
+.badges div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.badgeIcon{
+    height: 30px;
+    width: 30px;
+}
+.UserCard{
+    padding: 10px;
+}

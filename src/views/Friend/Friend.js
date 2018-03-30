@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import UserCard from '../../components/UserCard/UserCard'
 import axios from 'axios'
 
-class Profile extends Component {
+class Friend extends Component {
     constructor() {
         super()
         this.state = {
@@ -37,4 +37,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile
+export default Friend

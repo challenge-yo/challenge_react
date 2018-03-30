@@ -16,7 +16,6 @@ class Friends extends Component {
         }
     }
 
-
     componentDidMount() {
         this.getFriends()
         this.confirmFriends()
@@ -43,17 +42,19 @@ class Friends extends Component {
         })
     }
 
+
     render() {
         const friends = this.state.data.map((friend, i) => {
-            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image}  id={friend.facebook_id} status={'friends'} />
+            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image}  id={friend.facebook_id} status={'friends'} getfriends={this.getFriends()} score={friend.score}/>
         })
 
         const confirm = this.state.data2.map((friend, i) => {
-            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image} id={friend.facebook_id} status={'confirm'} />
+            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image} id={friend.facebook_id} status={'confirm'} confirmFriends={this.confirmFriends()} score={friend.score}/>
         })
 
         const actual = this.state.data3.map((friend, i) => {
-            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image} id={friend.facebook_id} status={'actual'}/>
+            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image} id={friend.facebook_id} status={'actual'} 
+            verified={this.actualFriends()} score={friend.score}/>
         })
         return (
             <div>

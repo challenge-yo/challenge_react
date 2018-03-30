@@ -6,3 +6,11 @@
     background-attachment: fixed;
     height: 100vh;
 }
+
+@media (min-width: 415px) { .main-app-wrapper {
+    margin: 50px;
+}}
+
+@media (max-width: 415px) { .main-app-wrapper {
+    margin: 8px;
+}}

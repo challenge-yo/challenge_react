@@ -1,3 +1,4 @@
+
 .sideBySide{
     display: flex;
     margin-left: 10px;
@@ -18,4 +19,18 @@
 .badges{
     display: flex;
     justify-content: space-around;
+    width: 80vw;
+}
+.badges div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.badgeIcon{
+    height: 30px;
+    width: 30px;
+}
+.UserCard{
+    padding: 10px;
 }

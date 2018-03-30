@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
-import axios from 'axios'
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider'
 

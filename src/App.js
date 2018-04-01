@@ -10,7 +10,8 @@ class App extends Component {
     const location = window.location.href.split('')
 
     return (
-      <div >
+
+      <div className='app'>
         { location[location.length -1] === '/' ? null : <GlobalHeader />}
         <div className='main-app-wrapper'>
           {routes}

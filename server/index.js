@@ -202,8 +202,9 @@ app.put('/api/declinefriend', function (req, res){
     })
 })
 
-app.delete('/api/deletefriend', function (req, res){
-    app.get('db').delete_friends([req.user.facebook_id, req.body.id]).then(response => {
+app.delete('/api/deletefriend/:id', function (req, res){
+    console.log( req.params.id )
+    app.get('db').delete_friends([req.user.facebook_id, req.params.id]).then(response => {
         res.status(200).send(response) 
     })
 })

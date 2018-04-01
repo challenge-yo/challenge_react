@@ -14,6 +14,8 @@ class Friends extends Component {
             data3: []
 
         }
+
+        this.getFriends = this.getFriends.bind( this )
     }
 
     componentDidMount() {
@@ -23,21 +25,21 @@ class Friends extends Component {
     }
 
     getFriends() {
-        axios.get(`http://localhost:3000/api/friends`).then(res => {
+        axios.get(`/api/friends`).then(res => {
             console.log('check here', res.data)
             this.setState({ data: res.data })
         })
     }
 
     confirmFriends() {
-        axios.get(`http://localhost:3000/api/confirm`).then(res => {
+        axios.get(`/api/confirm`).then(res => {
             console.log('confirm', res.data)
             this.setState({ data2: res.data })
         })
     }
 
     actualFriends() {
-        axios.get(`http://localhost:3000/api/verified`).then(res => {
+        axios.get(`/api/verified`).then(res => {
             this.setState({ data3: res.data })
         })
     }
@@ -45,16 +47,17 @@ class Friends extends Component {
 
     render() {
         const friends = this.state.data.map((friend, i) => {
-            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image}  id={friend.facebook_id} status={'friends'} getfriends={ () => this.getFriends() } score={friend.score}/>
+            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image}  id={friend.facebook_id} status={'friends'} score={friend.score}/>
         })
 
         const confirm = this.state.data2.map((friend, i) => {
-            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image} id={friend.facebook_id} status={'confirm'} confirmFriends={() => this.confirmFriends() } score={friend.score}/>
+            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image} id={friend.facebook_id} status={'confirm'} score={friend.score}/>
         })
 
         const actual = this.state.data3.map((friend, i) => {
+            console.log( friend )
             return <FriendsCard key={i} friend={friend.user_name} icon={friend.image} id={friend.facebook_id} status={'actual'} 
-            verified={() => this.actualFriends() } score={friend.score}/>
+             score={friend.score}/>
         })
         return (
             <div>

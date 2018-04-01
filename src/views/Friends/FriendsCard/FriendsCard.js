@@ -6,42 +6,6 @@ import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bu
 
 class FriendsCard extends Component {
 
-
-    addFriend() {
-        axios.post(`http://localhost:3000/api/addfriend`, {
-            id: this.props.id
-        }).then(res =>  {
-            
-        })
-    }
-
-    confirmFriend() {
-        axios.put(`/api/confirmfriend`, {
-            id: this.props.id
-        }).then(res => {
-
-        })
-    }
-
-    declineFriend() {
-        axios.put(`/api/declinefriend`, {
-            id: this.props.id
-        }).then(res => {
-
-        })
-    }
-
-    removeFriend() {
-        axios.delete(`/api/deletefriend/${this.props.id}`)
-        .then(res => {
-
-        })
-    }
-
-    handleChange(){
-        
-    }
-
     render() {
         return (
 
@@ -53,11 +17,11 @@ class FriendsCard extends Component {
                         leftAvatar={<Avatar src={this.props.icon} />}
                         rightIcon={<CommunicationChatBubble />}>
                         { this.props.status === 'friends' ? <div> 
-                        <button onClick={() => this.addFriend()}>Add Friend</button></div>
+                        <button onClick={() => this.props.addFriend( this.props.id )}>Add Friend</button></div>
                         : this.props.status === 'confirm' ? <div>
-                        <button onClick={() => this.confirmFriend()}>Confirm Friend</button>
-                        <button onClick={() => this.declineFriend()}>Decline Friend</button> 
-                        </div> : <div><button onClick={() => this.removeFriend()}>Remove Friend</button></div> }
+                        <button onClick={() => this.props.confirmFriend( this.props.id )}>Confirm Friend</button>
+                        <button onClick={() => this.props.declineFriend( this.props.id )}>Decline Friend</button> 
+                        </div> : <div><button onClick={() => this.props.removeFriend( this.props.id )}>Remove Friend</button></div> }
                     </ListItem>
                 </List>
             </div>

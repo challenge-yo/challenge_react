@@ -9,13 +9,16 @@ class Friends extends Component {
     constructor() {
         super()
         this.state = {
-            data: [],
-            data2: [],
-            data3: []
+            potential_friends: [],
+            confirm_needed: [],
+            current_friends: []
 
         }
 
-        this.getFriends = this.getFriends.bind( this )
+        this.addFriend = this.addFriend.bind( this )
+        this.confirmFriend = this.confirmFriend.bind( this )
+        this.declineFriend = this.declineFriend.bind( this )
+        this.removeFriend = this.removeFriend.bind( this )
     }
 
     componentDidMount() {
@@ -26,47 +29,79 @@ class Friends extends Component {
 
     getFriends() {
         axios.get(`/api/friends`).then(res => {
-            console.log('check here', res.data)
-            this.setState({ data: res.data })
+            this.setState({ potential_friends: res.data })
         })
     }
 
     confirmFriends() {
         axios.get(`/api/confirm`).then(res => {
-            console.log('confirm', res.data)
-            this.setState({ data2: res.data })
+            this.setState({ confirm_needed: res.data })
         })
     }
 
     actualFriends() {
         axios.get(`/api/verified`).then(res => {
-            this.setState({ data3: res.data })
+            this.setState({ current_friends: res.data })
+        })
+    }
+
+    // Actions ( Click Functions ) are passed down as props to the child component
+
+    addFriend(id) {
+        axios.post(`http://localhost:3000/api/addfriend`, {
+            id,
+        }).then(res =>  {
+            this.getFriends()
+        })
+    }
+
+    confirmFriend(id) {
+        axios.put(`/api/confirmfriend`, {
+            id,
+        }).then(res => {
+            this.confirmFriends()
+            this.actualFriends()
+        })
+    }
+
+    declineFriend(id) {
+        axios.put(`/api/declinefriend`, {
+            id,
+        }).then(res => {
+            this.confirmFriends()
+        })
+    }
+
+    removeFriend(id) {
+        axios.delete(`/api/deletefriend/${id}`)
+        .then(res => {
+            this.actualFriends()
+            this.getFriends()
         })
     }
 
 
     render() {
-        const friends = this.state.data.map((friend, i) => {
-            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image}  id={friend.facebook_id} status={'friends'} score={friend.score}/>
+        const potential_friends = this.state.potential_friends.map((friend, i) => {
+            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image}  id={friend.facebook_id} status={'friends'} score={friend.score} addFriend={ this.addFriend } removeFriend={ this.removeFriend } confirmFriend={ this.confirmFriend } declineFriend={ this.declineFriend }/>
         })
 
-        const confirm = this.state.data2.map((friend, i) => {
-            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image} id={friend.facebook_id} status={'confirm'} score={friend.score}/>
+        const confirm_needed = this.state.confirm_needed.map((friend, i) => {
+            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image} id={friend.facebook_id} status={'confirm'} score={friend.score} addFriend={ this.addFriend } removeFriend={ this.removeFriend } confirmFriend={ this.confirmFriend } declineFriend={ this.declineFriend }/>
         })
 
-        const actual = this.state.data3.map((friend, i) => {
-            console.log( friend )
+        const actual_friends = this.state.current_friends.map((friend, i) => {
             return <FriendsCard key={i} friend={friend.user_name} icon={friend.image} id={friend.facebook_id} status={'actual'} 
-             score={friend.score}/>
+             score={friend.score} addFriend={ this.addFriend } removeFriend={ this.removeFriend } confirmFriend={ this.confirmFriend } declineFriend={ this.declineFriend }/>
         })
         return (
             <div>
                 <Subheader>Potential Friends</Subheader>
-                {friends}
+                { potential_friends }
                 <Subheader>Friend Requests</Subheader>
-                {confirm}
+                { confirm_needed }
                 <Subheader>Confirmed Friends</Subheader>
-                {actual}
+                { actual_friends }
             </div>
         )
     }

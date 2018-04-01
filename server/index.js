@@ -172,14 +172,13 @@ app.get('/api/wager/:id', function(req, res){
     })
 })
 app.get('/api/users/:id', function(req, res){
-    console.log
     app.get('db').get_user_details([req.params.id]).then( response => {
         res.status(200).send(response[0])
     })
 })
 
 app.post('/api/addfriend', function (req, res){
-    app.get('db').find_relationship([req.user.facebook_id, req.body.id]).then(response => { console.log( response )
+    app.get('db').find_relationship([req.user.facebook_id, req.body.id]).then(response => {
         if (response.length > 0 ){
             res.status(200).send('relationship exists')
         } else {
@@ -203,7 +202,6 @@ app.put('/api/declinefriend', function (req, res){
 })
 
 app.delete('/api/deletefriend/:id', function (req, res){
-    console.log( req.params.id )
     app.get('db').delete_friends([req.user.facebook_id, req.params.id]).then(response => {
         res.status(200).send(response) 
     })

@@ -9,7 +9,7 @@ class FriendsCard extends Component {
 
     render() {
 
-        const button = this.props.status === 'friends' ? <RaisedButton onClick={() => this.props.addFriend( this.props.id )} primary={true} label='Add Friend' /> : this.props.status === 'confirm' ? <RaisedButton onClick={() => this.props.confirmFriend( this.props.id )} primary={true} label='Confirm' /> : <RaisedButton onClick={() => this.props.removeFriend( this.props.id )} primary={true} label='Remove' />
+        const button = this.props.location.pathname.includes('/wager') ? <RaisedButton onClick={() => this.setState({isDisabled: false})} label='Verifier' /> : this.props.status === 'friends' ? <RaisedButton onClick={() => this.props.addFriend( this.props.id )} primary={true} label='Add Friend' /> : this.props.status === 'confirm' ? <RaisedButton onClick={() => this.props.confirmFriend( this.props.id )} primary={true} label='Confirm' /> : <RaisedButton onClick={() => this.props.removeFriend( this.props.id )} primary={true} label='Remove' />
 
 
         return (

@@ -79,7 +79,7 @@ class CheckoutForm extends React.Component {
                     </div>
 
                     <div>
-                        <Subheader>Confirmed Friends</Subheader>
+                        <Subheader>Confirmation Person</Subheader>
                         {actual}
                         <form onSubmit={this.handleSubmit} className="form">
                             <label>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import FriendsCard from './FriendsCard/FriendsCard'
-import Subheader from 'material-ui/Subheader';
+import Subheader from 'material-ui/Subheader'
+import Snackbar from 'material-ui/Snackbar'
 
 
 class Friends extends Component {
@@ -11,8 +12,8 @@ class Friends extends Component {
         this.state = {
             potential_friends: [],
             confirm_needed: [],
-            current_friends: []
-
+            current_friends: [],
+            open: false
         }
 
         this.addFriend = this.addFriend.bind( this )
@@ -51,6 +52,9 @@ class Friends extends Component {
         axios.post(`/api/addfriend`, {
             id,
         }).then(res =>  {
+            this.setState({
+                open: true
+            })
             this.getFriends()
         })
     }
@@ -59,6 +63,9 @@ class Friends extends Component {
         axios.put(`/api/confirmfriend`, {
             id,
         }).then(res => {
+            this.setState({
+                open: true
+            })
             this.confirmFriends()
             this.actualFriends()
         })
@@ -68,6 +75,9 @@ class Friends extends Component {
         axios.put(`/api/declinefriend`, {
             id,
         }).then(res => {
+            this.setState({
+                open: true
+            })
             this.confirmFriends()
         })
     }
@@ -75,6 +85,9 @@ class Friends extends Component {
     removeFriend(id) {
         axios.delete(`/api/deletefriend/${id}`)
         .then(res => {
+            this.setState({
+                open: true
+            })
             this.actualFriends()
             this.getFriends()
         })
@@ -102,6 +115,12 @@ class Friends extends Component {
                 { confirm_needed }
                 <Subheader>Confirmed Friends</Subheader>
                 { actual_friends }
+
+                <Snackbar
+                    open={this.state.open}
+                    message="Success!"
+                    autoHideDuration={4000}
+                />
             </div>
         )
     }

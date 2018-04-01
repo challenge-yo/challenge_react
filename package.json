@@ -9,6 +9,7 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "jest": "^22.4.3",
     "massive": "^4.7.1",
     "material-ui": "^0.20.0",
     "passport": "^0.4.0",
@@ -24,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "testing": "jest"
   },
   "main": "server/index.js",
   "proxy": "http://localhost:3005"

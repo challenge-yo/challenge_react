@@ -48,7 +48,7 @@ class Friends extends Component {
     // Actions ( Click Functions ) are passed down as props to the child component
 
     addFriend(id) {
-        axios.post(`http://localhost:3000/api/addfriend`, {
+        axios.post(`/api/addfriend`, {
             id,
         }).then(res =>  {
             this.getFriends()

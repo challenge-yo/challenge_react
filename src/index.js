@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import { HashRouter } from 'react-router-dom'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 ReactDOM.render(
 

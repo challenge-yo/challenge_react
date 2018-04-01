@@ -148,6 +148,8 @@ app.get('/api/specificChallenge/:id', function( req, res ) {
     })
 })
 
+// remember to change back to req.user - just using for styling friend page
+
 app.get('/api/friends', function(req, res){
     app.get('db').potential_friends([req.user.facebook_id]).then( response => {
         res.status(200).send(response)

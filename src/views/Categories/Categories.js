@@ -15,7 +15,7 @@ class Categories extends Component {
         this.getCategories()
     }
       getCategories(){
-          axios.get('http://localhost:3000/api/categories').then(response => {
+          axios.get('/api/categories').then(response => {
             this.setState({categories: response.data})
           })
       }

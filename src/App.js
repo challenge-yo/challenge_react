@@ -11,11 +11,11 @@ class App extends Component {
 
     return (
       <div >
-        { location[location.length -1] === '/' ? null : <GlobalHeader />}
-        <div className='main-app-wrapper'>
-          {routes}
-        </div>
-        { location[location.length -1] === '/' ? null : <GlobalFooter />}
+            {location[location.length - 1] === '/' ? null : <GlobalHeader />}
+            <div className='main-app-wrapper'>
+              {routes}
+            </div>
+            {location[location.length - 1] === '/' ? null : <GlobalFooter />}
       </div>
     );
   }

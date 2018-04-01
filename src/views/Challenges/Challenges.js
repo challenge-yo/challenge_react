@@ -17,7 +17,7 @@ class Challenges extends Component {
     }
     categorizeChallenges(){
         let categoryName = this.props.match.params.Category
-        axios.get(`http://localhost:3000/api/challengeByCategory/${categoryName}`).then(response => {
+        axios.get(`/api/challengeByCategory/${categoryName}`).then(response => {
             this.setState({challenges: response.data})
     })}
 

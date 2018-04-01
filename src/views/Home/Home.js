@@ -16,7 +16,10 @@ class Home extends Component {
     randomChallenge(){
         axios.get('/api/random').then(response => {
             this.setState({featured: response.data})
-        })
+        }),
+        function(){
+            setTimeout(this.randomChallenge(), 2000)
+        }
     }
     render() {
         const challenge = this.state.featured.map((challenge, i) => {

@@ -5,8 +5,9 @@ const session = require('express-session')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 const Auth0Strategy = require('passport-auth0')
-const { REACT_REDIRECT, REACT_HOME, SERVER_PORT, SERVER_SECRET, SERVER_BASE, DOMAIN, CLIENTID, CLIENT_SECRET, CALLBACK_URL } = process.env
+const { REACT_REDIRECT, REACT_HOME, SERVER_PORT, SERVER_SECRET, SERVER_BASE, DOMAIN, CLIENTID, CLIENT_SECRET, CALLBACK_URL, STRIPE_PRIVATE_KEY } = process.env
 const checkForSession = require('./middleware/checkForSessions')
+const stripe = require('stripe')(STRIPE_PRIVATE_KEY);
 
 const app = express()
 
@@ -56,6 +57,39 @@ passport.use( new Auth0Strategy({
         } 
     })
 }))
+
+
+app.post('/api/payment', (req, res, next) => {
+    
+    function joesPennyFunction( amountArray) {
+        const pennies = [];
+        for (var i = 0; i < amountArray.length; i++) {
+          if (amountArray[i] === ".") {
+            if (typeof amountArray[i + 1] === "string") pennies.push(amountArray[i + 1]);
+            else pennies.push("0");
+            if (typeof amountArray[i + 2] === "string") pennies.push(amountArray[i + 2]);
+            else pennies.push("0");
+            break;
+          }
+          else pennies.push(amountArray[i]);
+        }
+        return parseInt(pennies.join(''));
+      }
+    
+
+    const charge = stripe.charges.create(
+        {
+            amount: joesPennyFunction(req.body.amount),
+            currency: 'usd',
+            source: req.body.token.id,
+            description: 'Stripe Elements test charge'
+        },
+        function(err, charge) {
+            if (err) return res.sendStatus(500);
+            else return res.status(200).send(charge);
+        }
+    );
+});
 
 passport.serializeUser( ( id, done ) => {
     done( null, id )

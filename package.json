@@ -25,9 +25,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "testing": "jest"
+    "test": "jest --watchAll",
+    "eject": "react-scripts eject"
   },
   "main": "server/index.js",
   "proxy": "http://localhost:3005"

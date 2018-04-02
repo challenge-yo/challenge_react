@@ -25,7 +25,7 @@ app.use( session({
 
 // REMEMBER - remove middleware... currently in testing mode.
 
-// app.use( checkForSession )
+app.use( checkForSession )
 
 app.use( passport.initialize() )
 
@@ -113,10 +113,10 @@ app.get('/auth/callback', passport.authenticate('auth0', {
 // change back to req.session.user if you want to auto log in
 
 app.get('/auth/me', ( req, res ) => {
-    if (!req.user) {
+    if (!req.session.user) {
         res.send( 'Not logged in!' )
     } else {
-        res.status(200).send( req.user )
+        res.status(200).send( req.session.user )
     }
 })
 

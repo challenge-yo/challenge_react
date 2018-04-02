@@ -5,9 +5,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { Card, CardActions, CardTitle } from 'material-ui/Card';
-import FriendsCard from './../../views/Friends/FriendsCard/FriendsCard'
 import Subheader from 'material-ui/Subheader';
 import styling from './checkout.css'
+import {List, ListItem } from 'material-ui/List'
+import Avatar from 'material-ui/Avatar'
+import { withRouter } from 'react-router-dom'
 
 
 class CheckoutForm extends React.Component {
@@ -19,6 +21,16 @@ class CheckoutForm extends React.Component {
             suggested: 0,
             average: 0,
             isDisabled: true,
+            green:false,
+            userChallenge:{ 
+                        challenge_id: 0,
+                        user_id: 0,
+                        validator_id: 0,
+                        start_time:0,
+                        end_time:0, 
+                        user_wager:0,
+                        is_validated:false
+                     }
         }
         this.handleAmount = this.handleAmount.bind(this)
         this.actualFriends = this.actualFriends.bind(this)
@@ -42,22 +54,36 @@ class CheckoutForm extends React.Component {
     componentDidMount() {
         this.actualFriends()
     }
+    handleClick(friend){
+    this.setState({isDisabled:false, userChallenge:{
+        challenge_id:this.props.match.params.id,
+        validator_id: friend.id,
+        user_wager: this.state.amount,
+        is_validated:false},
+        green:true
+     })
+    
+
+    }
 
     actualFriends() {
         axios.get(`/api/verified`).then(res => {
+            console.log(res.data)
             this.setState({ data: res.data })
         })
     }
 
     render() {
+        console.log({checkoutForm: this.props.wager})
         const actual = this.state.data.map((friend, i) => {
-            console.log(friend)
-            return <FriendsCard key={i} friend={friend.user_name} icon={friend.image} id={friend.facebook_id} status={'actual'}
-                score={friend.score} />
+
+            return <ListItem primaryText={friend.user_name} id={friend.id} leftAvatar={<Avatar src={friend.image}/>} rightIconButton={ <RaisedButton secondary={true} 
+            onClick={() => this.handleClick(friend)} label='Validator' />} />
+
         })
+
         return (
             <div>
-
                 <Card className='centerContent'>
                     <CardTitle title="Motivational Amount"
                         subtitle="How much money will motivate you to better yourself?" />
@@ -74,18 +100,22 @@ class CheckoutForm extends React.Component {
                         <h2>Your Motivational Amount:</h2>
                         <span className='sideBySide'>
                             <h3>$</h3>
-                            <TextField className='input' type='number' hintText={"25.00"} onChange={this.handleAmount} />
+                            <TextField className='input' type='string' hintText={"25.00"} onChange={this.handleAmount} />
                         </span>
                     </div>
 
                     <div>
-                        <Subheader>Confirmed Friends</Subheader>
-                        {actual}
+                        <Subheader>Confirmation Person</Subheader>
+                        <div>
+                            <List>
+                                {actual} 
+                            </List>
+                        </div>
                         <form onSubmit={this.handleSubmit} className="form">
                             <label>
                                 <CardElement style={{ base: { fontSize: '24px', color: 'black', '::placeholder': { color: 'black' } } }} />
                             </label>
-                            <button className="orderButton" disabled={this.state.isDisabled}>Motivate Me!</button>
+                            <button className="orderButton" disabled={!this.state.isDisabled}>Motivate Me!</button>
                         </form>
                     </div>
                 </Card>
@@ -95,5 +125,5 @@ class CheckoutForm extends React.Component {
     }
 }
 
-export default injectStripe(CheckoutForm);
+export default withRouter(injectStripe(CheckoutForm));
 

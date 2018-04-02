@@ -50,10 +50,10 @@ class CheckoutForm extends React.Component {
     }
 
     render() {
+        console.log({checkoutForm: this.props.wager})
         const actual = this.state.data.map((friend, i) => {
-            console.log(friend)
             return <FriendsCard key={i} friend={friend.user_name} icon={friend.image} id={friend.facebook_id} status={'actual'}
-                score={friend.score} />
+                score={friend.score}  />
         })
         return (
             <div>
@@ -85,7 +85,7 @@ class CheckoutForm extends React.Component {
                             <label>
                                 <CardElement style={{ base: { fontSize: '24px', color: 'black', '::placeholder': { color: 'black' } } }} />
                             </label>
-                            <button className="orderButton" disabled={this.state.isDisabled}>Motivate Me!</button>
+                            <button className="orderButton" disabled={!this.state.isDisabled}>Motivate Me!</button>
                         </form>
                     </div>
                 </Card>

@@ -17,6 +17,7 @@ class Wager extends Component {
     }
 
     render() {
+
         return(
             <div>
                 <WagerCard challenge={this.state.challenge}/>

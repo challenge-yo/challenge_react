@@ -13,7 +13,7 @@ function WagerCard(props) {
             <h2>{props.challenge.challenge_name} </h2>
 
             <div>
-                <InjectedCheckoutForm />
+                <InjectedCheckoutForm  />
             </div>
         </div>
     )

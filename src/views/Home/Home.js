@@ -35,7 +35,7 @@ class Home extends Component {
                 <div>
                     <h2>Challenge App Name</h2>
                 </div>
-                {challenge}
+                {/* {challenge} */}
             </div>
         )
     }

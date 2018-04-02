@@ -1,8 +1,8 @@
 import React from 'react'
-// import './UserCard.css'
+import './UserChallengesCard.css'
 // import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
-import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
-import {List, ListItem} from 'material-ui/List';
+import { Card, CardHeader } from 'material-ui/Card';
+import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
@@ -19,7 +19,15 @@ function UserChallengesCard(props) {
 
     return (
         <ListItem>
-            <h1>{'hello'}</h1>
+            <Card className='UserChallengesCard'>
+                <div className='sideBySide'>
+                    <Avatar src={badgeFinance} />
+                    <h2>{props.challenge.challenge_name}</h2>
+                </div>
+                <div className='pushLeft'>
+                    <h3>Time Left:{300}</h3>
+                </div>
+            </Card>
         </ListItem>
     )
 }

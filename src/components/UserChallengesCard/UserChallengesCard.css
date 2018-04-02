@@ -1,0 +1,23 @@
+.UserChallengesCard{
+    display: flex;
+    padding: 10px;
+    flex-direction: column; 
+
+    /* flex-direction: row;
+    justify-content: flex-start; */
+}
+
+.sideBySide{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: center; */
+}
+.sideBySide *{
+    margin:10px;
+}
+.pushLeft{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end
+}

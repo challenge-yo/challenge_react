@@ -29,8 +29,6 @@ class Profile extends Component {
         )})
         return (
             <div>
-                User Challenges View
-                {JSON.stringify(this.state.currentChallenges)}
                 <List>
                     {listItems}
                 </List>

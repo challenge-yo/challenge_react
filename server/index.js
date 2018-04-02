@@ -220,3 +220,10 @@ app.get('/api/random', function(req, res) {
     })
 })
 
+app.get('/api/userChallenges', function(req, res) {
+    console.log(req.user.id)
+    app.get('db').get_user_challenges([req.user.id]).then(response => {
+        res.status(200).send(response)
+    })
+})
+

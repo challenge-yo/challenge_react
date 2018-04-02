@@ -74,9 +74,12 @@ class CheckoutForm extends React.Component {
     }
 
     render() {
+        console.log({checkoutForm: this.props.wager})
         const actual = this.state.data.map((friend, i) => {
+
             return <ListItem primaryText={friend.user_name} id={friend.id} leftAvatar={<Avatar src={friend.image}/>} rightIconButton={ <RaisedButton secondary={true} 
             onClick={() => this.handleClick(friend)} label='Validator' />} />
+
         })
 
         return (
@@ -112,7 +115,7 @@ class CheckoutForm extends React.Component {
                             <label>
                                 <CardElement style={{ base: { fontSize: '24px', color: 'black', '::placeholder': { color: 'black' } } }} />
                             </label>
-                            <button className="orderButton" disabled={this.state.isDisabled}>Motivate Me!</button>
+                            <button className="orderButton" disabled={!this.state.isDisabled}>Motivate Me!</button>
                         </form>
                     </div>
                 </Card>

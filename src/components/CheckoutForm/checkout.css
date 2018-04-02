@@ -16,3 +16,7 @@
 .orderButton:disabled {
     background-color: gray;
 }
+
+.input::-webkit-input-placeholder{
+    color: lightgray
+}

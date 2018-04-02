@@ -21,3 +21,4 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
+example_spec.js

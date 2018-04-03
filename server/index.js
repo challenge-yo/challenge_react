@@ -234,6 +234,14 @@ app.post('/api/userChallenges', function(req, res) {
     })
 })
 
+app.get('/api/validate/:id', (req, res)=>{
+    console.log('user id',req.params.id)
+    app.get('db').get_validate_list([req.params.id*1]).then(dbRes=>{
+        console.log(dbRes)
+        res.status(200).send(dbRes)
+    })
+})
+
 // stripe endpoints
 app.post('/api/customer', (req, res)=>{
     

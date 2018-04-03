@@ -13,6 +13,7 @@ import LoginScreen from './views/LoginScreen/LoginScreen'
 import Wager from './views/Wager/Wager'
 import Profile from './views/Profile/Profile'
 import UserChallenges from './views/UserChallenges/UserChallenges'
+import Validate from './views/Validate/Validate'
 import { StripeProvider, Elements } from 'react-stripe-elements';
 
 
@@ -34,6 +35,7 @@ export default (
                 <Route component={LoginScreen} exact path='/' />
                 <Route component={Profile} path='/profile/:id' />
                 <Route component={UserChallenges} path='/UserChallenges/' />
+                <Route component={Validate} path='/Validate/:id' />
             </Switch>
         </Elements>
     </StripeProvider>

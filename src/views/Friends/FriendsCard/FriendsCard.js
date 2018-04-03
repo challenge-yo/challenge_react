@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import Avatar from 'material-ui/Avatar';
 import { List, ListItem } from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
-import Clear from 'material-ui/svg-icons/content/clear'
+// import Clear from 'material-ui/svg-icons/content/clear'
 
 class FriendsCard extends Component {
 

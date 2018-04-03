@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import { HashRouter } from 'react-router-dom'
-import {indigo500, indigo700, redA200} from 'material-ui/styles/colors'
+import {indigo500, indigo700} from 'material-ui/styles/colors'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 

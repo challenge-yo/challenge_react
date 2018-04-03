@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import UserChallengesCard from '../../components/UserChallengesCard/UserChallengesCard'
 import axios from 'axios'
-import {List, ListItem} from 'material-ui/List';
+import {List} from 'material-ui/List';
 
 
 class Profile extends Component {

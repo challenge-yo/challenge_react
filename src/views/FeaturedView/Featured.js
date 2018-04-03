@@ -18,7 +18,7 @@ class Featured extends Component {
     }
     getSpecificChallenge(){
         const id = this.props.match.params.id
-        axios.get(`http://localhost:3000/api/specificChallenge/${id}`).then(response => {
+        axios.get(`/api/specificChallenge/${id}`).then(response => {
           this.setState({challenges: response.data})
         })
       }

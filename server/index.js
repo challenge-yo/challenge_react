@@ -25,7 +25,7 @@ app.use( session({
 
 // REMEMBER - remove middleware... currently in testing mode.
 
-app.use( checkForSession )
+// app.use( checkForSession )
 
 app.use( passport.initialize() )
 
@@ -109,14 +109,14 @@ app.get('/auth/callback', passport.authenticate('auth0', {
     successRedirect: REACT_REDIRECT
 }))
 
-// REMEMBER - change back to req.session.user... currently in testing mode.
-// change back to req.session.user if you want to auto log in
+// REMEMBER - change back to req.user... currently in testing mode.
+// change back to req.user if you want to auto log in
 
 app.get('/auth/me', ( req, res ) => {
-    if (!req.session.user) {
+    if (!req.user) {
         res.send( 'Not logged in!' )
     } else {
-        res.status(200).send( req.session.user )
+        res.status(200).send( req.user )
     }
 })
 
@@ -148,11 +148,11 @@ app.get('/api/specificChallenge/:id', function( req, res ) {
     })
 })
 
-// remember to change back to req.session.user - just using for styling friend page
+// remember to change back to req.user - just using for styling friend page
 
 app.get('/api/friends', function(req, res){
-    app.get('db').potential_friends([req.session.user.facebook_id]).then( potential_friends => {
-        app.get('db').get_relationships([req.session.user.facebook_id]).then( relationship => {
+    app.get('db').potential_friends([req.user.facebook_id]).then( potential_friends => {
+        app.get('db').get_relationships([req.user.facebook_id]).then( relationship => {
 
             let newFriends = []
 
@@ -163,20 +163,20 @@ app.get('/api/friends', function(req, res){
             var validList = potential_friends.filter((item, index) => {
                 return !newFriends.includes(item['facebook_id'])
               })
-              
+
               res.send( validList )
         })
     })
 })
 
 app.get('/api/confirm', function(req, res){
-    app.get('db').confirm_needed([req.session.user.facebook_id]).then( response => {
+    app.get('db').confirm_needed([req.user.facebook_id]).then( response => {
         res.status(200).send(response)
     })
 })
 
 app.get('/api/verified', function(req, res){
-    app.get('db').confirmed_friends([req.session.user.facebook_id]).then( response => {
+    app.get('db').confirmed_friends([req.user.facebook_id]).then( response => {
         res.status(200).send(response)
     })
 })
@@ -193,11 +193,11 @@ app.get('/api/users/:id', function(req, res){
 })
 
 app.post('/api/addfriend', function (req, res){
-    app.get('db').find_relationship([req.session.user.facebook_id, req.body.id]).then(response => {
+    app.get('db').find_relationship([req.user.facebook_id, req.body.id]).then(response => {
         if (response.length > 0 ){
             res.status(200).send('relationship exists')
         } else {
-            app.get('db').add_friends([req.session.user.facebook_id, req.body.id, 0]).then(response => {
+            app.get('db').add_friends([req.user.facebook_id, req.body.id, 0]).then(response => {
                 res.status(200).send(response) 
             })
         }
@@ -205,19 +205,19 @@ app.post('/api/addfriend', function (req, res){
 })
 
 app.put('/api/confirmfriend', function (req, res){
-    app.get('db').confirm_friends([ req.body.id, req.session.user.facebook_id]).then(response => {
+    app.get('db').confirm_friends([ req.body.id, req.user.facebook_id]).then(response => {
         res.status(200).send(response) 
     })
 })
 
 app.put('/api/declinefriend', function (req, res){
-    app.get('db').decline_friends([req.body.id, req.session.user.facebook_id]).then(response => {
+    app.get('db').decline_friends([req.body.id, req.user.facebook_id]).then(response => {
         res.status(200).send(response) 
     })
 })
 
 app.delete('/api/deletefriend/:id', function (req, res){
-    app.get('db').delete_friends([req.session.user.facebook_id, req.params.id]).then(response => {
+    app.get('db').delete_friends([req.user.facebook_id, req.params.id]).then(response => {
         res.status(200).send(response) 
     })
 })

@@ -21,7 +21,7 @@ class LoginScreen extends Component {
     render() {
         return(
             <div className='login-page-main-div'>
-                <RaisedButton backgroundColor='black' buttonStyle={{ color: 'white', fontSize: '2.5rem', width: '175px', height: '75px', position: 'fixed', bottom: 0, right: 0 }} className='login-page-main-button' href='http://localhost:3005/auth'>LOGIN</RaisedButton>
+                <RaisedButton backgroundColor='black' buttonStyle={{ color: 'white', fontSize: '2.5rem', width: '175px', height: '75px', position: 'fixed', bottom: 0, right: 0 }} className='login-page-main-button' href={ process.env.REACT_APP_LOGIN }>LOGIN</RaisedButton>
             </div>
         )
     }

@@ -2,14 +2,15 @@ import React from 'react';
 import { injectStripe, CardElement } from 'react-stripe-elements';
 import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+// import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import { Card, CardActions, CardTitle } from 'material-ui/Card';
+import { Card, CardTitle } from 'material-ui/Card';
 import Subheader from 'material-ui/Subheader';
-import styling from './checkout.css'
+import './checkout.css'
 import {List, ListItem } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import { withRouter } from 'react-router-dom'
+import moment from 'moment'
 
 
 class CheckoutForm extends React.Component {
@@ -43,13 +44,32 @@ class CheckoutForm extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-
-        this.props.stripe.createToken({ name: 'Clyde' }).then(({ token }) => {
-            console.log('CF token:', token);
-            axios.post('/api/payment', { token, amount: this.state.amount }).then(resp => {
-                console.log("RESP", resp)
-            })
-        });
+        console.log('handle Submit:state:', this.state)
+        console.log('handle Submit:props:', this.props)
+        
+        let body = { 
+            challenge_id: this.props.challenge.id*1,
+            user_id: 0,// set on server from req.user
+            validator_id: this.state.userChallenge.validator_id*1,
+            start_time:moment().format('X')*1,
+            end_time: moment().format('X')*1 + 5, 
+            validation_window: moment().format('X')*1 + 10,
+            users_wager:this.state.amount*1,
+            is_validated:0,// 0 = false
+            email:'',
+            currency:'',
+            customer:'',
+            source:'',
+         }
+         axios.post('/api/userChallenges', body).then(res =>{
+             console.log('done', res.data)
+         })
+        // this.props.stripe.createToken({ name: 'Clyde' }).then(({ token }) => {
+        //     console.log('CF token:', token);
+        //     axios.post('/api/payment', { token, amount: this.state.amount }).then(resp => {
+        //         console.log("RESP", resp)
+        //     })
+        // });
     }
     componentDidMount() {
         this.actualFriends()
@@ -68,16 +88,38 @@ class CheckoutForm extends React.Component {
 
     actualFriends() {
         axios.get(`/api/verified`).then(res => {
-            console.log(res.data)
             this.setState({ data: res.data })
         })
     }
 
+    sub(){
+        console.log('sub')
+        let body = { 
+            challenge_id: this.props.challenge.id*1,
+            user_id: 0,// set on server from req.user
+            validator_id: this.state.userChallenge.validator_id*1,
+            start_time:moment().format('X')*1,
+            end_time: moment().format('X')*1 + 5, 
+            validation_window: moment().format('X')*1 + 10,
+            user_wager:this.state.amount*1,
+            is_validated:0,// 0 = false
+            email:'',
+            currency:'',
+            customer:'',
+            source:'',
+         }
+         axios.post('/api/customer', body).then(res=>{
+             console.log('created customer', res.data)
+         })
+    }
+    charge(){
+        console.log('charge')
+    }
+
     render() {
-        console.log({checkoutForm: this.props.wager})
         const actual = this.state.data.map((friend, i) => {
 
-            return <ListItem primaryText={friend.user_name} id={friend.id} leftAvatar={<Avatar src={friend.image}/>} rightIconButton={ <RaisedButton secondary={true} 
+            return <ListItem key={i} primaryText={friend.user_name} id={friend.id} leftAvatar={<Avatar src={friend.image}/>} rightIconButton={ <RaisedButton secondary={true} 
             onClick={() => this.handleClick(friend)} label='Validator' />} />
 
         })
@@ -89,12 +131,12 @@ class CheckoutForm extends React.Component {
                         subtitle="How much money will motivate you to better yourself?" />
 
                     <span className='sideBySide'>
-                        <h3>Suggested:$ </h3>
-                        <h3> axios set to state{this.state.suggested}</h3>
+                        <h3>Challenge: </h3>
+                        <h3> {this.props.challenge.challenge_name}</h3>
                     </span>
                     <span className='sideBySide'>
-                        <h3>Average:</h3>
-                        <h3>axios set to state{this.state.average}</h3>
+                        <h3>Suggested:$ </h3>
+                        <h3> {this.props.challenge.suggested_wager}</h3>
                     </span>
                     <div>
                         <h2>Your Motivational Amount:</h2>
@@ -115,9 +157,11 @@ class CheckoutForm extends React.Component {
                             <label>
                                 <CardElement style={{ base: { fontSize: '24px', color: 'black', '::placeholder': { color: 'black' } } }} />
                             </label>
-                            <button className="orderButton" disabled={!this.state.isDisabled}>Motivate Me!</button>
+                            <button className="orderButton" disabled={false}>Motivate Me!</button>
                         </form>
                     </div>
+                    <button onClick={()=>this.sub()}>Sub</button> 
+                    <button onClick={()=>this.charge()}>charge</button> 
                 </Card>
 
             </div>

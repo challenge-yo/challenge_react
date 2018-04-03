@@ -52,6 +52,11 @@ class GlobalFooter extends Component {
                     onClick={() => this.select(3)}
                     containerElement={<Link to={"/profile/"+this.state.userId}/>}
                 />
+                    <BottomNavigationItem
+                    icon={<ProfileIcon />}
+                    onClick={() => this.select(4)}
+                    containerElement={<Link to={"/validate/"+this.state.userId}/>}
+                />
                 </BottomNavigation>
             </Paper>
     );

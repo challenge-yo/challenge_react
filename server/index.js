@@ -233,3 +233,36 @@ app.get('/api/random', function(req, res) {
     })
 })
 
+app.get('/api/userChallenges', function(req, res) {
+    console.log(req.user.id)
+    app.get('db').get_user_challenges([req.user.id]).then(response => {
+        res.status(200).send(response)
+    })
+})
+app.post('/api/userChallenges', function(req, res) {
+    req.body.user_id = req.user.id
+    const {challenge_id, user_id, validator_id, start_time, end_time, users_wager, is_validated, email, currency, customer, source, validation_window} = req.body
+    app.get('db').create_user_challenge([challenge_id, user_id, validator_id, start_time, end_time, users_wager, is_validated, email, currency, customer, source, validation_window]).then(response => {
+        res.status(200).send('created challenge')
+    })
+})
+
+app.get('/api/validate/:id', (req, res)=>{
+    console.log('user id',req.params.id)
+    app.get('db').get_validate_list([req.params.id*1]).then(dbRes=>{
+        console.log(dbRes)
+        res.status(200).send(dbRes)
+    })
+})
+
+// stripe endpoints
+app.post('/api/customer', (req, res)=>{
+    
+    res.status(200).send(req.body)
+})
+app.post('/api/charge', (req, res)=>{
+
+    res.status(200).send(req.body)
+})
+
+

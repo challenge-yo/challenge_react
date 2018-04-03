@@ -26,7 +26,7 @@ class FeaturedCard extends Component {
                     <b>Days to Complete:</b> {this.props.time}
                 </CardText>
                 <CardActions>
-                    <RaisedButton href={`http://localhost:3000/#/wager/${this.props.id}`} label='Accept Challenge' secondary={true} icon={<Add />} /> 
+                    <RaisedButton href={`/#/wager/${this.props.id}`} label='Accept Challenge' secondary={true} icon={<Add />} /> 
                 </CardActions>
             </Card>
         </div>    

@@ -64,6 +64,8 @@ class CheckoutForm extends React.Component {
          axios.post('/api/userChallenges', body).then(res =>{
              console.log('done', res.data)
          })
+         this.props.history.push('/categories')
+
         // this.props.stripe.createToken({ name: 'Clyde' }).then(({ token }) => {
         //     console.log('CF token:', token);
         //     axios.post('/api/payment', { token, amount: this.state.amount }).then(resp => {

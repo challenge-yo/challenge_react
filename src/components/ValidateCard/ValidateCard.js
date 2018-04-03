@@ -13,8 +13,10 @@ function ValidateCard(props) {
                 <div className='sideBySide'>
                     <h3>Challenge: {props.challenge.challenge_name}</h3>
                 </div>
-                <div className='pushLeft'>
-                    <button onClick={() => console.log(props)}>test</button>
+                <div className='sideBySide'>
+                    <img src={props.challenge.image} alt=""  style={{borderRadius:"50px"}}/>
+                    <h3>{props.challenge.user_name}</h3>
+                    <button onClick={()=>props.handleValidate(props.challenge)}>Validate</button>
                 </div>
             </Card>
         </ListItem>

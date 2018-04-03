@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {List, ListItem} from 'material-ui/List';
 import {Card} from 'material-ui/Card'
 import Avatar from 'material-ui/Avatar';
-import Divider from 'material-ui/Divider';
 
 class CategoryCard extends Component {
     render() {
@@ -14,7 +13,6 @@ class CategoryCard extends Component {
                         primaryText={this.props.name} 
                     />
                 </Card>
-                <Divider/>
             </List>
         )
     }

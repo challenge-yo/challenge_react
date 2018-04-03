@@ -7,6 +7,7 @@ import FriendsIcon from 'material-ui/svg-icons/action/supervisor-account'
 import ProfileIcon from 'material-ui/svg-icons/action/account-circle'
 import HomeIcon from 'material-ui/svg-icons/action/home'
 import ChallengeIcon from 'material-ui/svg-icons/action/assessment'
+import CheckCircle from 'material-ui/svg-icons/action/check-circle'
 
 class GlobalFooter extends Component {
   state = {
@@ -53,7 +54,7 @@ class GlobalFooter extends Component {
                     containerElement={<Link to={"/profile/"+this.state.userId}/>}
                 />
                     <BottomNavigationItem
-                    icon={<ProfileIcon />}
+                    icon={<CheckCircle />}
                     onClick={() => this.select(4)}
                     containerElement={<Link to={"/validate/"+this.state.userId}/>}
                 />

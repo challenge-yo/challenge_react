@@ -11,6 +11,9 @@ import {List, ListItem } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import { withRouter } from 'react-router-dom'
 import moment from 'moment'
+import { SelectField } from 'material-ui';
+import MenuItem from 'material-ui/MenuItem';
+import CheckBox from 'material-ui/svg-icons/action/check-circle'
 
 
 class CheckoutForm extends React.Component {
@@ -121,7 +124,7 @@ class CheckoutForm extends React.Component {
     render() {
         const actual = this.state.data.map((friend, i) => {
 
-            return <ListItem key={i} primaryText={friend.user_name} id={friend.id} leftAvatar={<Avatar src={friend.image}/>} rightIconButton={ <RaisedButton secondary={true} 
+            return <ListItem key={i} primaryText={friend.user_name} id={friend.id} leftAvatar={<Avatar src={friend.image}/>} rightIconButton={ <CheckBox secondary={true} 
             onClick={() => this.handleClick(friend)} label='Validator' />} />
 
         })
@@ -151,9 +154,10 @@ class CheckoutForm extends React.Component {
                     <div>
                         <Subheader>Confirmation Person</Subheader>
                         <div>
-                            <List>
-                                {actual} 
-                            </List>
+                            <SelectField autoWidth={ true }>
+                                <MenuItem primaryText='' />
+                                <MenuItem>{actual} </MenuItem>
+                            </SelectField>
                         </div>
                         <form onSubmit={this.handleSubmit} className="form">
                             <label>

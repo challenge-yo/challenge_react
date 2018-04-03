@@ -45,11 +45,9 @@ class Validate extends Component {
 
         return(
             <div>
-                Validate view
                 <List>
                     {validateList}
                 </List>
-                <button onClick={()=>console.log(this.state)}>Test</button>
             </div>
         )
     }

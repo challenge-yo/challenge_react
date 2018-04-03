@@ -25,7 +25,7 @@ app.use( session({
 
 // REMEMBER - remove middleware... currently in testing mode.
 
-app.use( checkForSession )
+// app.use( checkForSession )
 
 app.use( passport.initialize() )
 
@@ -110,13 +110,13 @@ app.get('/auth/callback', passport.authenticate('auth0', {
 }))
 
 // REMEMBER - change back to req.user... currently in testing mode.
-// change back to req.session.user if you want to auto log in
+// change back to req.user if you want to auto log in
 
 app.get('/auth/me', ( req, res ) => {
-    if (!req.session.user) {
+    if (!req.user) {
         res.send( 'Not logged in!' )
     } else {
-        res.status(200).send( req.session.user )
+        res.status(200).send( req.user )
     }
 })
 
@@ -151,8 +151,21 @@ app.get('/api/specificChallenge/:id', function( req, res ) {
 // remember to change back to req.user - just using for styling friend page
 
 app.get('/api/friends', function(req, res){
-    app.get('db').potential_friends([req.session.user.facebook_id]).then( response => {
-        res.status(200).send(response)
+    app.get('db').potential_friends([req.user.facebook_id]).then( potential_friends => {
+        app.get('db').get_relationships([req.user.facebook_id]).then( relationship => {
+
+            let newFriends = []
+
+            relationship.map( friend_id => {
+                newFriends.push( friend_id.facebook_id )
+            })
+            
+            var validList = potential_friends.filter((item, index) => {
+                return !newFriends.includes(item['facebook_id'])
+              })
+
+              res.send( validList )
+        })
     })
 })
 

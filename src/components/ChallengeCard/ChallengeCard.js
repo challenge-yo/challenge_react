@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {List, ListItem} from 'material-ui/List';
 import {Card} from 'material-ui/Card'
 // import {darkBlack} from 'material-ui/styles/colors'
-import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
 
@@ -27,7 +26,6 @@ class ChallengeCard extends Component {
                                 // }
                             />
                     </Card>
-                <Divider/>
             </List>
         )
     }

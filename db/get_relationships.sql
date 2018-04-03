@@ -1,0 +1,1 @@
+select user_id2 as facebook_id from relationships where user_id1 = $1

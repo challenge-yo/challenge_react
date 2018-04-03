@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Card, CardTitle } from 'material-ui/Card';
 import Subheader from 'material-ui/Subheader';
-import styling from './checkout.css'
+import './checkout.css'
 import {List, ListItem } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import { withRouter } from 'react-router-dom'
@@ -54,8 +54,8 @@ class CheckoutForm extends React.Component {
             start_time:moment().format('X')*1,
             end_time: moment().format('X')*1 + 5, 
             validation_window: moment().format('X')*1 + 10,
-            user_wager:this.state.amount*1,
-            is_validated:false,
+            users_wager:this.state.amount*1,
+            is_validated:0,// 0 = false
             email:'',
             currency:'',
             customer:'',
@@ -90,6 +90,30 @@ class CheckoutForm extends React.Component {
         axios.get(`/api/verified`).then(res => {
             this.setState({ data: res.data })
         })
+    }
+
+    sub(){
+        console.log('sub')
+        let body = { 
+            challenge_id: this.props.challenge.id*1,
+            user_id: 0,// set on server from req.user
+            validator_id: this.state.userChallenge.validator_id*1,
+            start_time:moment().format('X')*1,
+            end_time: moment().format('X')*1 + 5, 
+            validation_window: moment().format('X')*1 + 10,
+            user_wager:this.state.amount*1,
+            is_validated:0,// 0 = false
+            email:'',
+            currency:'',
+            customer:'',
+            source:'',
+         }
+         axios.post('/api/customer', body).then(res=>{
+             console.log('created customer', res.data)
+         })
+    }
+    charge(){
+        console.log('charge')
     }
 
     render() {
@@ -136,6 +160,8 @@ class CheckoutForm extends React.Component {
                             <button className="orderButton" disabled={false}>Motivate Me!</button>
                         </form>
                     </div>
+                    <button onClick={()=>this.sub()}>Sub</button> 
+                    <button onClick={()=>this.charge()}>charge</button> 
                 </Card>
 
             </div>

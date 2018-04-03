@@ -227,12 +227,21 @@ app.get('/api/userChallenges', function(req, res) {
     })
 })
 app.post('/api/userChallenges', function(req, res) {
-    console.log(req.session.user.id)
     req.body.user_id = req.session.user.id
-    console.log(req.body)
-    res.status(200).send(req.body)
-    // app.get('db').get_user_challenges([req.session.user.id]).then(response => {
-    //     res.status(200).send(response)
-    // })
+    const {challenge_id, user_id, validator_id, start_time, end_time, users_wager, is_validated, email, currency, customer, source, validation_window} = req.body
+    app.get('db').create_user_challenge([challenge_id, user_id, validator_id, start_time, end_time, users_wager, is_validated, email, currency, customer, source, validation_window]).then(response => {
+        res.status(200).send('created challenge')
+    })
 })
+
+// stripe endpoints
+app.post('/api/customer', (req, res)=>{
+    
+    res.status(200).send(req.body)
+})
+app.post('/api/charge', (req, res)=>{
+
+    res.status(200).send(req.body)
+})
+
 

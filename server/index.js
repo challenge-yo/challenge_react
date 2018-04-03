@@ -263,19 +263,19 @@ app.put('/api/validate/', (req, res) => {
 app.put('/api/badge/', (req, res) => {
     // console.log(req.body)
     category = req.body.category.toLowerCase()
-    let health =0 , finance =0 , education =0, spiritual =0, buisness =0, social =0, family =0;
+    let health =0 , finance =0 , education =0, spiritual =0, business =0, social =0, family =0;
     switch (category) {
         case 'health': health = 1; break;
         case 'finance': finance = 1; break;
         case 'education': education = 1; break;
         case 'spiritual': spiritual = 1; break;
-        case 'buisness': buisness = 1; break;
+        case 'business': business = 1; break;
         case 'social': social = 1; break;
         case 'family': family = 1; break;
         default: console.log(' category switch defaulted'); break;
     }
-    console.log(category, req.body.user_id * 1, health, finance, education, spiritual, buisness, social, family)
-    app.get('db').update_badges([ req.body.user_id * 1, health, finance, education, spiritual, buisness, social, family]).then(dbRes => {
+    console.log(category, req.body.user_id * 1, health, finance, education, spiritual, business, social, family)
+    app.get('db').update_badges([ req.body.user_id * 1, health, finance, education, spiritual, business, social, family]).then(dbRes => {
         res.status(200).send('validated')
     })
 })

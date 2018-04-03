@@ -27,6 +27,12 @@ class Validate extends Component {
             this.setState({validateList:res.data})
         })   
     }
+    updateBadges(challenge){
+        console.log('challenge', challenge)
+        axios.put('/api/badge', challenge).then(res=>{
+            console.log('updated badges')
+        })
+    }
 
     handleValidate(challenge){
         console.log('handle Validate', challenge)
@@ -34,6 +40,7 @@ class Validate extends Component {
             console.log('im back', res.data)
             this.getList()
         })
+        this.updateBadges(challenge)
     }
 
     render() {

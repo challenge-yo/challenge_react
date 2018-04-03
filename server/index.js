@@ -248,14 +248,34 @@ app.post('/api/userChallenges', function (req, res) {
 })
 
 app.get('/api/validate/:id', (req, res) => {
-    console.log('user id', req.params.id)
+    // console.log('user id', req.params.id)
     app.get('db').get_validate_list([req.params.id * 1]).then(dbRes => {
-        console.log(dbRes)
+        // console.log(dbRes)
         res.status(200).send(dbRes)
     })
 })
 app.put('/api/validate/', (req, res) => {
     app.get('db').validate_challenge([req.body.challenge_id * 1]).then(dbRes => {
+        res.status(200).send('validated')
+    })
+})
+
+app.put('/api/badge/', (req, res) => {
+    // console.log(req.body)
+    category = req.body.category.toLowerCase()
+    let health =0 , finance =0 , education =0, spiritual =0, buisness =0, social =0, family =0;
+    switch (category) {
+        case 'health': health = 1; break;
+        case 'finance': finance = 1; break;
+        case 'education': education = 1; break;
+        case 'spiritual': spiritual = 1; break;
+        case 'buisness': buisness = 1; break;
+        case 'social': social = 1; break;
+        case 'family': family = 1; break;
+        default: console.log(' category switch defaulted'); break;
+    }
+    console.log(category, req.body.user_id * 1, health, finance, education, spiritual, buisness, social, family)
+    app.get('db').update_badges([ req.body.user_id * 1, health, finance, education, spiritual, buisness, social, family]).then(dbRes => {
         res.status(200).send('validated')
     })
 })

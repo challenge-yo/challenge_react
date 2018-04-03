@@ -14,7 +14,7 @@ function ValidateCard(props) {
                     <h3>Challenge: {props.challenge.challenge_name}</h3>
                 </div>
                 <div className='pushLeft'>
-                    <button onClick={() => console.log(props)}>test</button>
+                    <button onClick={()=>props.handleValidate(props.challenge)}>Validate</button>
                 </div>
             </Card>
         </ListItem>

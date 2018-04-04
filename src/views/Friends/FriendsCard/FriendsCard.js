@@ -9,13 +9,13 @@ import { Card } from 'material-ui/Card';
 
 class FriendsCard extends Component {
 
-    render() {
+    render() { 
 
         const button = this.props.wager ? <RaisedButton secondary={true} label='Verifier' /> : this.props.status === 'friends' ? <RaisedButton onClick={() => this.props.addFriend( this.props.id )} secondary={true} label='Add Friend' /> : this.props.status === 'confirm' ? <RaisedButton onClick={() => this.props.confirmFriend( this.props.id )} secondary={true} label='Confirm' /> : <RaisedButton onClick={() => this.props.removeFriend( this.props.id )} secondary={true} label='Remove' />
 
         return (
                 <Card>
-                    <ListItem style={{ margin: '10px'}} primaryText={ this.props.friend} leftAvatar={<Avatar src={ this.props.icon } />} rightIconButton={ button } />
+                    <ListItem style={{ margin: '10px'}} primaryText={ this.props.friend} leftAvatar={<Avatar src='https://lookaside.facebook.com/platform/profilepic/?asid=10156448086284218&height=50&width=50&ext=1522702076&hash=AeTDdrqLJN4OcDD4' />} rightIconButton={ button } />
                 </Card>
         )
     }

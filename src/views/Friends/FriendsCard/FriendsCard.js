@@ -15,7 +15,7 @@ class FriendsCard extends Component {
 
         return (
                 <Card>
-                    <ListItem style={{ margin: '10px'}} primaryText={ this.props.friend} leftAvatar={<Avatar src='https://lookaside.facebook.com/platform/profilepic/?asid=10156448086284218&height=50&width=50&ext=1522702076&hash=AeTDdrqLJN4OcDD4' />} rightIconButton={ button } />
+                    <ListItem style={{ margin: '10px'}} primaryText={ this.props.friend} leftAvatar={<Avatar src={ this.props.icon } />} rightIconButton={ button } />
                 </Card>
         )
     }

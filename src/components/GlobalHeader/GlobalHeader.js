@@ -24,7 +24,7 @@ class GlobalHeader extends Component {
                         <ListItem primaryText='Friends' />
                         <ListItem primaryText='Challenges' />
                         <Divider />
-                        <ListItem primaryText='Logout' href='http://localhost:3005/logout'/>
+                        <ListItem primaryText='Logout' href='/logout'/>
                     </List>
                 </Drawer>
             </AppBar>

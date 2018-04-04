@@ -11,7 +11,7 @@ class FeaturedCard extends Component {
             <Card>
                 <CardHeader titleStyle={{ fontSize: '1.5rem', paddingTop: '7px'}} title={this.props.name.toUpperCase()} avatar={this.props.icon}/>
                 <CardMedia>
-                    <img src='https://pixabay.com/get/ea37b60a20f4033ed1534705fb0938c9bd22ffd41cb313479df1c879a5/dog-3275802_1920.jpg' alt='' />
+                    <img src={ this.props.image } alt='' />
                 </CardMedia>
                 <CardText>
                     <b>Description:</b> {this.props.description}

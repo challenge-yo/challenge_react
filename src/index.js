@@ -23,6 +23,11 @@ const muiTheme = getMuiTheme({
     snackbar: {
         backgroundColor: "#039be5",
         textColor: "rgba(255, 255, 255, 0.87)"
+    },
+    textField: {
+        focusColor: "#039be5",
+        textColor: "#ffffff",
+        hintColor: "rgba(255, 255, 255, 0.54)"
     }
 })
 

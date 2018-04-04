@@ -8,7 +8,9 @@
 }
 
 @media (min-width: 415px) { .main-app-wrapper {
-    margin: 50px;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    margin-top: 50px;
     margin-bottom: 100px;
 }}
 

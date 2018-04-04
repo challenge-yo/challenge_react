@@ -166,7 +166,7 @@ app.get('/api/friends', function (req, res) {
 
             res.send(validList)
         })
-    })
+    })  
 })
 
 app.get('/api/confirm', function (req, res) {

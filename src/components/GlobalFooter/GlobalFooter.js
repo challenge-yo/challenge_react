@@ -37,26 +37,31 @@ class GlobalFooter extends Component {
                     icon={<HomeIcon />}
                     onClick={() => this.select(0)}
                     containerElement={<Link to="/home"/>}
+                    id='HomeIcon'
                 />
                 <BottomNavigationItem
                     icon={<ChallengeIcon />}
                     onClick={() => this.select(1)}
                     containerElement={<Link to="/categories"/>}
+                    id='ChallengeIcon'
                 />
                     <BottomNavigationItem
                     icon={<FriendsIcon  />}
                     onClick={() => this.select(2)}
                     containerElement={<Link to="/friends"/>}
+                    id='FriendsIcon'
                 />
                     <BottomNavigationItem
                     icon={<ProfileIcon />}
                     onClick={() => this.select(3)}
                     containerElement={<Link to={"/profile/"+this.state.userId}/>}
+                    id='ProfileIcon'
                 />
                     <BottomNavigationItem
                     icon={<CheckCircle />}
                     onClick={() => this.select(4)}
                     containerElement={<Link to={"/validate/"+this.state.userId}/>}
+                    id='CheckCircle'
                 />
                 </BottomNavigation>
             </Paper>

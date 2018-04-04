@@ -46,6 +46,10 @@ class Friends extends Component {
         })
     }
 
+    testFunction() {
+        return 2 + 2
+    }
+
     // Actions ( Click Functions ) are passed down as props to the child component
 
     addFriend(id) {

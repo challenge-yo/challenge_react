@@ -16,7 +16,7 @@ function UserCard(props) {
             <Card className='UserCard'>
                 <CardHeader
                     title={props.user.first_name + ' ' + props.user.last_name}
-                    subtitle={"Rank: 34"}
+                    subtitle={`Score: ${props.user.score}`}
                     avatar={props.user.image}
                 />
                 <CardTitle title="Badges" />

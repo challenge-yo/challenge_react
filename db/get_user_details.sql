@@ -1,4 +1,4 @@
-select u.id, u.user_name, u.first_name, u.last_name, u.image,
+select u.id, u.user_name, u.first_name, u.last_name, u.image, u.score,
 b.health, b.finance, b.social, b.education, b.buisness, b.family, b.spiritual
 
 from users u

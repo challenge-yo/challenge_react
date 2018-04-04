@@ -18,13 +18,15 @@ class Profile extends Component {
                 last_name: "",
                 social: 0,
                 spiritual: 0,
-                user_name: ""
+                user_name: "",
+                score:0
             }
         }
     }
     componentDidMount() {
         let userId = this.props.match.params.id
         axios.get('/api/users/' + userId).then(res => {
+            console.log(res.data)
             this.setState({ user: res.data })
         })
     }

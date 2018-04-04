@@ -11,15 +11,17 @@ import {List, ListItem } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import { withRouter } from 'react-router-dom'
 import moment from 'moment'
-import { SelectField } from 'material-ui';
+import { SelectField, CardHeader, Divider } from 'material-ui';
 import MenuItem from 'material-ui/MenuItem';
 import CheckBox from 'material-ui/svg-icons/action/check-circle'
+import Select from 'material-ui';
 
 
 class CheckoutForm extends React.Component {
     constructor() {
         super()
         this.state = {
+            value: null,
             data: [],
             amount: 0,
             suggested: 0,
@@ -87,9 +89,9 @@ class CheckoutForm extends React.Component {
         is_validated:false},
         green:true
      })
-    
-
     }
+
+    handleSelect = (event, index, value) => this.setState({value});
 
     actualFriends() {
         axios.get(`/api/verified`).then(res => {
@@ -124,53 +126,46 @@ class CheckoutForm extends React.Component {
     render() {
         const actual = this.state.data.map((friend, i) => {
 
-            return <ListItem key={i} primaryText={friend.user_name} id={friend.id} leftAvatar={<Avatar src={friend.image}/>} rightIconButton={ <CheckBox secondary={true} 
-            onClick={() => this.handleClick(friend)} label='Validator' />} />
+            return <MenuItem key={i} primaryText={friend.user_name} id={friend.id} leftIcon={<Avatar src={friend.image}/>} onClick={ () => this.handleClick( friend )} />
 
         })
 
         return (
-            <div>
                 <Card className='centerContent'>
                     <CardTitle title="Motivational Amount"
-                        subtitle="How much money will motivate you to better yourself?" />
+                               subtitle="How much money will motivate you to better yourself?" />
 
-                    <span className='sideBySide'>
-                        <h3>Challenge: </h3>
-                        <h3> {this.props.challenge.challenge_name}</h3>
-                    </span>
-                    <span className='sideBySide'>
-                        <h3>Suggested:$ </h3>
-                        <h3> {this.props.challenge.suggested_wager}</h3>
-                    </span>
-                    <div>
-                        <h2>Your Motivational Amount:</h2>
-                        <span className='sideBySide'>
-                            <h3>$</h3>
-                            <TextField className='input' type='string' hintText={"25.00"} onChange={this.handleAmount} />
-                        </span>
-                    </div>
+                        <CardHeader title={'Challenge: ' + this.props.challenge.challenge_name } />
+                        <CardHeader title={'Suggested Amount: $' +  this.props.challenge.suggested_wager} />
 
-                    <div>
-                        <Subheader>Confirmation Person</Subheader>
-                        <div>
-                            <SelectField autoWidth={ true }>
-                                <MenuItem primaryText='' />
-                                <MenuItem>{actual} </MenuItem>
-                            </SelectField>
-                        </div>
+                    
+                            <CardTitle title="Choose an Amount" />
+                            <TextField className='input' type='string' hintText={"$ " + "25.00"} onChange={this.handleAmount} />
+                   
+
+                    
+                        <CardTitle title="Validator"
+                                subtitle="Choose a friend to validate your completion of the challenge" />
+                        
+                        <SelectField 
+                            autoWidth={ true }
+                            value={this.state.value}
+                            onChange={this.handleSelect}>
+
+                            { actual }
+
+                        </SelectField>
+                        
                         <form onSubmit={this.handleSubmit} className="form">
-                            <label>
-                                <CardElement style={{ base: { fontSize: '24px', color: 'black', '::placeholder': { color: 'black' } } }} />
-                            </label>
-                            <button className="orderButton" disabled={false}>Motivate Me!</button>
+                                <br />
+                                <CardElement style={{ base: { fontSize: '24px', color: 'white', '::placeholder': { color: 'white' } } }} />
+                                <br />
+                                <Divider />
+                                <br />
+                            <button className="orderButton" disabled={this.state.isDisabled}>Motivate Me!</button>
                         </form>
-                    </div>
-                    <button onClick={()=>this.sub()}>Sub</button> 
-                    <button onClick={()=>this.charge()}>charge</button> 
+                    
                 </Card>
-
-            </div>
         );
     }
 }

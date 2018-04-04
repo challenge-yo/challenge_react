@@ -20,7 +20,7 @@ class Home extends Component {
     }
     render() {
         const challenge = this.state.featured.map((challenge, i) => {
-            return  <FeaturedCard key={i} name={challenge.challenge_name} category={challenge.category} difficulty={challenge.difficulty}
+            return  <FeaturedCard key={i} image={ challenge.image } name={challenge.challenge_name} category={challenge.category} difficulty={challenge.difficulty}
             time={challenge.due_time} icon={challenge.badge} description={challenge.description} id={challenge.id} /> 
         })
         return(

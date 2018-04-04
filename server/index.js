@@ -113,10 +113,10 @@ app.get('/auth/callback', passport.authenticate('auth0', {
 // change back to req.session.user if you want to auto log in
 
 app.get('/auth/me', (req, res) => {
-    if (!req.user ) {
+    if (!req.user) {
         res.send('Not logged in!')
     } else {
-        res.status(200).send(req.user )
+        res.status(200).send(req.user)
     }
 })
 
@@ -151,8 +151,8 @@ app.get('/api/specificChallenge/:id', function (req, res) {
 // remember to change back to req.session.user - just using for styling friend page
 
 app.get('/api/friends', function (req, res) {
-    app.get('db').potential_friends([req.user .facebook_id]).then(potential_friends => {
-        app.get('db').get_relationships([req.user .facebook_id]).then(relationship => {
+    app.get('db').potential_friends([req.user.facebook_id]).then(potential_friends => {
+        app.get('db').get_relationships([req.user.facebook_id]).then(relationship => {
 
             let newFriends = []
 
@@ -170,13 +170,13 @@ app.get('/api/friends', function (req, res) {
 })
 
 app.get('/api/confirm', function (req, res) {
-    app.get('db').confirm_needed([req.user .facebook_id]).then(response => {
+    app.get('db').confirm_needed([req.user.facebook_id]).then(response => {
         res.status(200).send(response)
     })
 })
 
 app.get('/api/verified', function (req, res) {
-    app.get('db').confirmed_friends([req.user .facebook_id]).then(response => {
+    app.get('db').confirmed_friends([req.user.facebook_id]).then(response => {
         res.status(200).send(response)
     })
 })
@@ -193,11 +193,11 @@ app.get('/api/users/:id', function (req, res) {
 })
 
 app.post('/api/addfriend', function (req, res) {
-    app.get('db').find_relationship([req.user .facebook_id, req.body.id]).then(response => {
+    app.get('db').find_relationship([req.user.facebook_id, req.body.id]).then(response => {
         if (response.length > 0) {
             res.status(200).send('relationship exists')
         } else {
-            app.get('db').add_friends([req.user .facebook_id, req.body.id, 0]).then(response => {
+            app.get('db').add_friends([req.user.facebook_id, req.body.id, 0]).then(response => {
                 res.status(200).send(response)
             })
         }
@@ -205,19 +205,19 @@ app.post('/api/addfriend', function (req, res) {
 })
 
 app.put('/api/confirmfriend', function (req, res) {
-    app.get('db').confirm_friends([req.body.id, req.user .facebook_id]).then(response => {
+    app.get('db').confirm_friends([req.body.id, req.user.facebook_id]).then(response => {
         res.status(200).send(response)
     })
 })
 
 app.put('/api/declinefriend', function (req, res) {
-    app.get('db').decline_friends([req.body.id, req.user .facebook_id]).then(response => {
+    app.get('db').decline_friends([req.body.id, req.user.facebook_id]).then(response => {
         res.status(200).send(response)
     })
 })
 
 app.delete('/api/deletefriend/:id', function (req, res) {
-    app.get('db').delete_friends([req.user .facebook_id, req.params.id]).then(response => {
+    app.get('db').delete_friends([req.user.facebook_id, req.params.id]).then(response => {
         res.status(200).send(response)
     })
 })
@@ -234,13 +234,13 @@ app.get('/api/random', function (req, res) {
 })
 
 app.get('/api/userChallenges', function (req, res) {
-    console.log(req.user .id)
-    app.get('db').get_user_challenges([req.user .id]).then(response => {
+    console.log(req.user.id)
+    app.get('db').get_user_challenges([req.user.id]).then(response => {
         res.status(200).send(response)
     })
 })
 app.post('/api/userChallenges', function (req, res) {
-    req.body.user_id = req.user .id
+    req.body.user_id = req.user.id
     const { challenge_id, user_id, validator_id, start_time, end_time, users_wager, is_validated, email, currency, customer, source, validation_window } = req.body
     app.get('db').create_user_challenge([challenge_id, user_id, validator_id, start_time, end_time, users_wager, is_validated, email, currency, customer, source, validation_window]).then(response => {
         res.status(200).send('created challenge')
@@ -261,7 +261,6 @@ app.put('/api/validate/', (req, res) => {
 })
 
 app.put('/api/badge/', (req, res) => {
-    console.log('///////////////////////////////////////////////////////////////')
     category = req.body.category.toLowerCase()
     let health =0 , finance =0 , education =0, spiritual =0, business =0, social =0, family =0;
     switch (category) {
@@ -274,7 +273,6 @@ app.put('/api/badge/', (req, res) => {
         case 'family': family = 1; break;
         default: console.log(' category switch defaulted'); break;
     }
-    console.log(category, req.body.user_id * 1, health, finance, education, spiritual, business, social, family)
     app.get('db').update_badges([ req.body.user_id * 1, health, finance, education, spiritual, business, social, family])
     .then(response=>{
             app.get('db').update_user_score([req.body.user_id * 1, req.body.award_amount])

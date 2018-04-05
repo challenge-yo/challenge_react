@@ -4,7 +4,7 @@
     background-size: cover;
     background-position: 100% top;
     background-attachment: fixed;
-    height: 100vh;
+    height: 90vh;
 }
 
 @media (min-width: 415px) { .main-app-wrapper {

@@ -27,7 +27,7 @@ class Challenges extends Component {
             time={challenge.due_time} icon={challenge.badge} description={challenge.description} /></Link>
         })
         return(
-            <div>
+            <div className='main-app-wrapper'>
                 {challenges}
             </div>
         )

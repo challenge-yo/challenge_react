@@ -20,11 +20,11 @@ class GlobalHeader extends Component {
             <AppBar onLeftIconButtonClick={ () => this.handleToggle() }>
                 <Drawer open={this.state.open} docked={false} onRequestChange={(open) => this.setState({open})}>
                     <List>
-                        <ListItem primaryText='Home' />
-                        <ListItem primaryText='Friends' />
-                        <ListItem primaryText='Challenges' />
+                        <ListItem onClick={ () => this.handleToggle() } href='/#/home' primaryText='Home' />
+                        <ListItem onClick={ () => this.handleToggle() } href='/#/friends' primaryText='Friends' />
+                        <ListItem onClick={ () => this.handleToggle() } href='/#/categories' primaryText='Categories' />
                         <Divider />
-                        <ListItem primaryText='Logout' href='/logout'/>
+                        <ListItem href='/logout' primaryText='Logout' />
                     </List>
                 </Drawer>
             </AppBar>

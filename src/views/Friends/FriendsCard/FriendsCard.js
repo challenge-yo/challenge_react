@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
 import Avatar from 'material-ui/Avatar';
-import { List, ListItem } from 'material-ui/List';
+import { ListItem } from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Card } from 'material-ui/Card';
 

@@ -1,20 +1,14 @@
 import React from 'react';
 import { injectStripe, CardElement } from 'react-stripe-elements';
 import axios from 'axios';
-import RaisedButton from 'material-ui/RaisedButton';
-// import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import { Card, CardTitle } from 'material-ui/Card';
-import Subheader from 'material-ui/Subheader';
 import './checkout.css'
-import {List, ListItem } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 import { SelectField, CardHeader, Divider } from 'material-ui';
 import MenuItem from 'material-ui/MenuItem';
-import CheckBox from 'material-ui/svg-icons/action/check-circle'
-import Select from 'material-ui';
 
 
 class CheckoutForm extends React.Component {
@@ -140,7 +134,7 @@ class CheckoutForm extends React.Component {
 
                     
                             <CardTitle title="Choose an Amount" />
-                            <TextField className='input' type='string' hintText={"$ " + "25.00"} onChange={this.handleAmount} />
+                            <TextField className='input' type='string' hintText="$  25.00" onChange={this.handleAmount} />
                    
 
                     

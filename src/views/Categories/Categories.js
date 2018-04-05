@@ -24,7 +24,7 @@ class Categories extends Component {
         return <Link style={{textDecoration: 'none', textSize: 32}}key={i} to={`/challenges/${category.category}`}><CategoryCard  name={category.category} icon={category.badge}/></Link>
         })         
         return(
-            <div>
+            <div className='main-app-wrapper'>
                 {categories}
             </div>
         )

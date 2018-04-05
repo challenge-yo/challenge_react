@@ -30,7 +30,7 @@ class Friend extends Component {
     }
     render() {
         return (
-            <div>
+            <div className='main-app-wrapper'>
                 <UserCard user={this.state.user} />
             </div>
         )

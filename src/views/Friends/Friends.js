@@ -112,7 +112,7 @@ class Friends extends Component {
              score={friend.score} addFriend={ this.addFriend } removeFriend={ this.removeFriend } confirmFriend={ this.confirmFriend } declineFriend={ this.declineFriend }/>
         })
         return (
-            <div>
+            <div className='main-app-wrapper'>
                 <Subheader>Potential Friends</Subheader>
                 { potential_friends }
                 <Subheader>Friend Requests</Subheader>

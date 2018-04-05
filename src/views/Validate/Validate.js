@@ -51,7 +51,7 @@ class Validate extends Component {
         )})
 
         return(
-            <div>
+            <div className='main-app-wrapper'>
                 <List>
                     {validateList}
                 </List>

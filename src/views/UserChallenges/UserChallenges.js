@@ -28,7 +28,7 @@ class Profile extends Component {
             <UserChallengesCard key={i} challenge={x} />
         )})
         return (
-            <div>
+            <div className='main-app-wrapper'>
                 <List>
                     {listItems}
                 </List>

@@ -19,7 +19,7 @@ class Wager extends Component {
     render() {
 
         return(
-            <div>
+            <div className='main-app-wrapper'>
                 <WagerCard challenge={this.state.challenge}/>
                 {/* <button onClick={()=>console.log(this.state)}>test</button> */}
             </div>

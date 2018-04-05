@@ -13,7 +13,7 @@ class App extends Component {
 
       <div className='app'>
         { location[location.length -1] === '/' ? null : <GlobalHeader />}
-        <div className='main-app-wrapper'>
+        <div>
           {routes}
         </div>
         { location[location.length -1] === '/' ? null : <GlobalFooter />}
